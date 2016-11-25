@@ -1,0 +1,6 @@
+framework module Pods_Proxitude {
+  umbrella header "Pods-Proxitude-umbrella.h"
+
+  export *
+  module * { export * }
+}

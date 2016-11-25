@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  Proxitude
+//  PostDemo
 //
-//  Created by Michael Liu on 11/22/16.
+//  Created by Michael Liu on 11/23/16.
 //  Copyright © 2016 Michael Liu. All rights reserved.
 //
 
@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        UIApplication.shared.isStatusBarHidden = true
         return true
     }
 

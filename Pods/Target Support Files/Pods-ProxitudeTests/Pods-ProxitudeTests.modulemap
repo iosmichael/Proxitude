@@ -1,0 +1,6 @@
+framework module Pods_ProxitudeTests {
+  umbrella header "Pods-ProxitudeTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
