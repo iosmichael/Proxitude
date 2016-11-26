@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import FirebaseAuth
 
-class LogInViewController: UIViewController {
+class LogInViewController: UIViewController, GIDSignInUIDelegate {
 
+    @IBOutlet weak var googleSignin: GIDSignInButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        GIDSignIn.sharedInstance().uiDelegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -20,7 +23,15 @@ class LogInViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    @IBAction func signout(_ sender: Any) {
+        signOut()
+    }
     
+    func signOut(){
+        try! FIRAuth.auth()!.signOut()
+        GIDSignIn.sharedInstance().signOut()
+
+    }
 
     /*
     // MARK: - Navigation

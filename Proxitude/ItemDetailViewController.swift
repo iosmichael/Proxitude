@@ -13,9 +13,11 @@ class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableView
     let imageCollectionIdentifier = "images"
     let imageCellIdentifier = "imageCell"
     let customCellIdentifier = "listCell"
+    let contactCellIdentifier = "contactCell"
     var images = [UIImage]()
     
     let imageCollectionCellHeight:CGFloat = 100
+    let contactCellHeight: CGFloat = 80
     let customListCellHeight:CGFloat = 44
     
     enum cellType {
@@ -41,29 +43,43 @@ class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        setupNav()
         registerCell()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : list.count
+        return section == 1 ? list.count : 1
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section == 0 ? imageCollectionCellHeight : CustomTableViewCell.dynamicHeight(label: list[indexPath.row].1, input: list[indexPath.row].2)
+        switch indexPath.section {
+        case 0:
+            return imageCollectionCellHeight
+        case 1:
+            return CustomTableViewCell.dynamicHeight(label: list[indexPath.row].1, input: list[indexPath.row].2)
+        case 2:
+            return contactCellHeight
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell:ImagesTableViewCell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier) as! ImagesTableViewCell
             return cell
-        }else{
+        }else if indexPath.section == 1{
             let cell:CustomTableViewCell = tableView.dequeueReusableCell(withIdentifier: customCellIdentifier) as! CustomTableViewCell
             let (type,L1,L2) = list[indexPath.row]
             fill(cell: cell,type: type,L1: L1,L2: L2)
+            return cell
+        }else{
+            let cell:ContactTableViewCell = tableView.dequeueReusableCell(withIdentifier: contactCellIdentifier) as! ContactTableViewCell
+            cell.accessoryType = .disclosureIndicator
             return cell
         }
     }
@@ -96,12 +112,14 @@ class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableView
     func registerCell(){
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: customCellIdentifier)
         tableView.register(ImagesTableViewCell.self, forCellReuseIdentifier: imageCellIdentifier)
+        tableView.register(UINib.init(nibName: "ContactTableViewCell", bundle: nil), forCellReuseIdentifier: contactCellIdentifier)
         tableView.separatorStyle = .none
     }
     
     func setup(){
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.showsVerticalScrollIndicator = false
         fillImages()
     }
     
@@ -138,6 +156,33 @@ class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableView
         
     }
 
+    func setupNav(){
+        navigationController?.navigationBar.barTintColor = UIColor.init(hex: "525659")
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white,NSFontAttributeName:UIFont.italicSystemFont(ofSize: 17)]
+        let navRightBtn = UIBarButtonItem.init(image: UIImage.init(named:"email"),style:.plain, target: self, action: #selector(email))
+        let navLeftBtn = UIBarButtonItem.init(image: UIImage.init(named:"backBtn"),style:.plain, target: self, action: #selector(back))
+        navigationItem.rightBarButtonItem = navRightBtn
+        navigationItem.leftBarButtonItem = navLeftBtn
+        navigationItem.leftBarButtonItem?.tintColor = UIColor.white
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.white
+    }
+    
+    func back(){
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func email(){
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
+    }
     
     /*
     // MARK: - Navigation

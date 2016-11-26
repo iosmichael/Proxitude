@@ -24,6 +24,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         setup()
         test()
+        navigationController?.masterNav()
+        addPostBtn()
         // Do any additional setup after loading the view.
     }
 
@@ -102,15 +104,17 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         items.append("Burrito")
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func addPostBtn(){
+        let navRightBtn = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(presentPost))
+        navigationItem.rightBarButtonItem = navRightBtn
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.white
     }
-    */
+    
+    func presentPost(){
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let postViewController = storyboard.instantiateViewController(withIdentifier: "post")
+        navigationController?.pushViewController(postViewController, animated: true)
+    }
 
 }
 

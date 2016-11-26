@@ -9,8 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LogInViewController" customModule="PostDemo" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LogInViewController" customModule="Proxitude" customModuleProvider="target">
             <connections>
+                <outlet property="googleSignin" destination="nLy-tZ-omJ" id="vf9-8S-hPo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,7 +19,48 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UHq-TL-qQ2">
+                    <rect key="frame" x="30" y="150" width="315" height="150"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFs-O6-HeI">
+                            <rect key="frame" x="30" y="92" width="255" height="28"/>
+                            <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <state key="normal" title="Choose Your School">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="signout:" destination="-1" eventType="touchUpInside" id="MZc-qV-EBc"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nLy-tZ-omJ" customClass="GIDSignInButton">
+                            <rect key="frame" x="30" y="32" width="255" height="40"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="PY3-iI-qoG"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="0.845703125" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="JUo-RT-MDm"/>
+                        <constraint firstItem="nLy-tZ-omJ" firstAttribute="top" secondItem="UHq-TL-qQ2" secondAttribute="top" constant="32" id="NsN-xt-MJR"/>
+                        <constraint firstItem="nLy-tZ-omJ" firstAttribute="trailing" secondItem="tFs-O6-HeI" secondAttribute="trailing" id="fC6-rN-NEj"/>
+                        <constraint firstItem="tFs-O6-HeI" firstAttribute="leading" secondItem="UHq-TL-qQ2" secondAttribute="leading" constant="30" id="fKC-zm-iFt"/>
+                        <constraint firstItem="tFs-O6-HeI" firstAttribute="centerX" secondItem="UHq-TL-qQ2" secondAttribute="centerX" id="n6h-Wt-NYV"/>
+                        <constraint firstItem="tFs-O6-HeI" firstAttribute="top" secondItem="nLy-tZ-omJ" secondAttribute="bottom" constant="20" id="qre-U9-dEP"/>
+                        <constraint firstItem="nLy-tZ-omJ" firstAttribute="leading" secondItem="tFs-O6-HeI" secondAttribute="leading" id="wlb-MW-Vy7"/>
+                    </constraints>
+                </view>
+            </subviews>
             <color key="backgroundColor" red="0.14117647058823529" green="0.63921568627450975" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="UHq-TL-qQ2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="150" id="0qS-wU-Rpq"/>
+                <constraint firstItem="UHq-TL-qQ2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="KD8-ng-x3v"/>
+                <constraint firstItem="UHq-TL-qQ2" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vrc-bL-1J4"/>
+            </constraints>
+            <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>
     </objects>
 </document>

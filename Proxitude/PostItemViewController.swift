@@ -27,8 +27,8 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     var list = [(cellType.LI,"Title","Item Title"),
                 (cellType.LI,"Price","Item Price"),
-                (cellType.LL,"Detail",""),
-                (cellType.LL,"Tags",""),
+                (cellType.LL,"Detail","(Required)"),
+                (cellType.LL,"Tags","(Required)"),
                 (cellType.CII,"Field","Value"),
                 (cellType.CLL,"Weight","3 lbs")]
     
@@ -38,7 +38,7 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
+        setupNav()
         addPhotoBtn()
         tableview.delegate = self
         tableview.dataSource = self
@@ -48,6 +48,14 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
         // Do any additional setup after loading the view, typically from a nib.
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -92,6 +100,13 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 2 {
+            let logController = LogInViewController(nibName:"LogInViewController",bundle:nil)
+            present(logController, animated: true, completion: nil)
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: imageCollectionIdentifier, for: indexPath)
         let imageView = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: 90, height: 90))
@@ -114,9 +129,10 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
         tableview.register(CustomTableViewCell.self, forCellReuseIdentifier: "ListCell")
         tableview.register(ImagesTableViewCell.self, forCellReuseIdentifier: "ImageCell")
         tableview.separatorStyle = UITableViewCellSeparatorStyle.singleLine
+        tableview.showsVerticalScrollIndicator = false
     }
     
-    func setup(){
+    func setupNav(){
         navigationController?.navigationBar.barTintColor = UIColor.init(hex: "525659")
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white,NSFontAttributeName:UIFont.italicSystemFont(ofSize: 17)]
@@ -129,7 +145,7 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     
     func cancel(){
-        print("cancel")
+        navigationController?.popViewController(animated: true)
     }
     
     func submit(){

@@ -36,3 +36,13 @@ class MasterViewController: UITabBarController {
     */
 
 }
+
+extension UINavigationController{
+    
+    public func masterNav(){
+        navigationBar.barTintColor = UIColor.init(hex: "525659")
+        navigationBar.isTranslucent = false
+        navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white,NSFontAttributeName:UIFont.italicSystemFont(ofSize: 17)]
+    }
+    
+}
