@@ -42,6 +42,7 @@
 		9E59FC8B1DE4FD67000DF062 /* ProxitudeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E59FC8A1DE4FD67000DF062 /* ProxitudeTests.swift */; };
 		9E59FC961DE4FD67000DF062 /* ProxitudeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E59FC951DE4FD67000DF062 /* ProxitudeUITests.swift */; };
 		9E69B4AB1DE9671700AAAC0C /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E69B4AA1DE9671700AAAC0C /* Query.swift */; };
+		9E69B4AD1DE9755D00AAAC0C /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E69B4AC1DE9755D00AAAC0C /* Contact.swift */; };
 		9EEDD3F51DE93106007D7D58 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEDD3F41DE93106007D7D58 /* Item.swift */; };
 		9EEDD3F71DE93187007D7D58 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EEDD3F61DE93187007D7D58 /* GoogleService-Info.plist */; };
 		D36C4FAD2B6773CA3D9606A3 /* Pods_ProxitudeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2A57A340003F250F1EF544 /* Pods_ProxitudeTests.framework */; };
@@ -106,6 +107,7 @@
 		9E59FC951DE4FD67000DF062 /* ProxitudeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxitudeUITests.swift; sourceTree = "<group>"; };
 		9E59FC971DE4FD67000DF062 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E69B4AA1DE9671700AAAC0C /* Query.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
+		9E69B4AC1DE9755D00AAAC0C /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		9EEDD3F41DE93106007D7D58 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		9EEDD3F61DE93187007D7D58 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9EEDD4031DE936C1007D7D58 /* Proxitude-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Proxitude-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 		9E5130671DE8CE8D0014140B /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				9E486C831DE8E409003CDBBE /* HomePageSlideView.swift */,
 				9E5130481DE8CBD60014140B /* CustomTableViewCell.swift */,
 				9E51304A1DE8CBD60014140B /* ImagesTableViewCell.swift */,
 				9E51304E1DE8CBD60014140B /* ItemTableViewCell.swift */,
@@ -191,7 +194,6 @@
 				9E5130561DE8CBD70014140B /* TagTableViewCell.xib */,
 				9E51306B1DE8CF4F0014140B /* ContactTableViewCell.xib */,
 				9E486C7E1DE8DEE1003CDBBE /* ProfileTableViewCell.xib */,
-				9E486C831DE8E409003CDBBE /* HomePageSlideView.swift */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -201,6 +203,7 @@
 			children = (
 				9EEDD3F41DE93106007D7D58 /* Item.swift */,
 				9E69B4AA1DE9671700AAAC0C /* Query.swift */,
+				9E69B4AC1DE9755D00AAAC0C /* Contact.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -587,6 +590,7 @@
 				9E5130641DE8CBD70014140B /* SearchViewController.swift in Sources */,
 				9E0CD00D1DE91C40000C1FF9 /* QRCodeViewController.swift in Sources */,
 				9E51306C1DE8CF4F0014140B /* ContactTableViewCell.swift in Sources */,
+				9E69B4AD1DE9755D00AAAC0C /* Contact.swift in Sources */,
 				9E5130611DE8CBD70014140B /* MasterViewController.swift in Sources */,
 				9E486C841DE8E409003CDBBE /* HomePageSlideView.swift in Sources */,
 				9E0CD00B1DE8EB64000C1FF9 /* ProfileTableViewController.swift in Sources */,

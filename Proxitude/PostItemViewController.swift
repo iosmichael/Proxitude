@@ -17,7 +17,16 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
     let imageLimits = 5
     let imageCollectionCellHeight:CGFloat = 100
     let customListCellHeight:CGFloat = 44
+    
+    let tagSelectorIndex = 3
+    let detailControllerIndex = 2
+    
+    var tags = [String]()
     var images = [UIImage]()
+    var fields = [(String,String)]()
+    var itemTitle: UITextField?
+    var price: UITextField?
+    var detail: String?
     
     enum cellType {
         case LL
@@ -29,8 +38,7 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
                 (cellType.LI,"Price","Item Price"),
                 (cellType.LL,"Detail","(Required)"),
                 (cellType.LL,"Tags","(Required)"),
-                (cellType.CII,"Field","Value"),
-                (cellType.CLL,"Weight","3 lbs")]
+                (cellType.CII,"Field","Value")]
     
     @IBOutlet weak var tableview: UITableView!
 
@@ -101,9 +109,13 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 2 {
-            let logController = LogInViewController(nibName:"LogInViewController",bundle:nil)
-            present(logController, animated: true, completion: nil)
+        if indexPath.row == tagSelectorIndex{
+            let tagSelectorController = ChooseTagsTableViewController()
+            navigationController?.pushViewController(tagSelectorController, animated: true)
+        }else if indexPath.row == detailControllerIndex{
+            let detailController = DetailController()
+            detailController.parentC = self
+            navigationController?.pushViewController(detailController, animated: true)
         }
     }
     
@@ -149,7 +161,10 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     
     func submit(){
-        print("submit")
+//        let item = Item()
+//        item.postData(name: "Macbook", price: "$18.00", detail: "This Macbook is for sale", tags: ["Electronic"], images: images, fields: fields)
+        
+        navigationController?.popViewController(animated: true)
     }
     
     func addBtn(label:String, input:String){
@@ -188,6 +203,16 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
         }
     }
     
+    func fillDetail(detail:String){
+        list[detailControllerIndex] = (cellType.LL,"Detail",detail)
+        tableview.reloadData()
+    }
+    
+    func fillTags(tags:[String]){
+        self.tags = tags
+        tableview.reloadData()
+    }
+    
     func addPhotoBtn(){
         images.insert(UIImage.init(named: "photo")!, at: images.count)
     }
@@ -213,6 +238,8 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
         let lightbox = LightboxController(images: lightboxImages, startIndex: 0)
         imagePicker.present(lightbox, animated: true, completion: nil)
     }
+
+    
     
     func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
         imagePicker.dismiss(animated: true, completion: nil)
@@ -223,5 +250,44 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
 
     
+}
+
+class DetailController:UIViewController{
+    
+    var detail: String?
+    var textView: UITextView?
+    weak var parentC: PostItemViewController?
+    let leftMargin:CGFloat = 20
+    let topMargin:CGFloat = 10
+    
+    override func viewDidLoad() {
+        let contentView:CGRect = self.view.frame
+        textView = UITextView.init(frame:CGRect.init(x: leftMargin, y: topMargin, width: contentView.width-2*leftMargin, height: contentView.height-2*topMargin))
+        textView?.layer.borderWidth = 0
+        textView?.backgroundColor = UIColor.white
+        self.view.backgroundColor = UIColor.groupTableViewBackground
+        self.view.addSubview(textView!)
+        setupNav()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
+    }
+    
+    func setupNav(){
+        let navLeftBtn = UIBarButtonItem.init(title: "Done", style: .done, target: self, action: #selector(dismissCurrent))
+        navigationItem.leftBarButtonItem = navLeftBtn
+        navigationItem.leftBarButtonItem?.tintColor = UIColor.white
+        navigationItem.title = "Description"
+    }
+    
+    func dismissCurrent(){
+        parentC?.fillDetail(detail: (textView?.text)!)
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 

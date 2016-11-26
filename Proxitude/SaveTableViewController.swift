@@ -12,7 +12,7 @@ class SaveTableViewController: UITableViewController {
 
     let itemCellIdentifier = "itemCell"
     let itemCellHeight: CGFloat = 55
-    var list = [String]()
+    var list = [Item]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,14 +43,16 @@ class SaveTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: itemCellIdentifier, for: indexPath)
+        let cell:ItemTableViewCell = tableView.dequeueReusableCell(withIdentifier: itemCellIdentifier, for: indexPath) as! ItemTableViewCell
+        cell.setItem(item: list[indexPath.row])
         cell.accessoryType = .disclosureIndicator
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let itemDetailController = storyboard.instantiateViewController(withIdentifier: "itemDetail")
+        let itemDetailController:ItemDetailViewController = storyboard.instantiateViewController(withIdentifier: "itemDetail") as! ItemDetailViewController
+        itemDetailController.item = list[indexPath.row]
         navigationController?.pushViewController(itemDetailController, animated: true)
     }
     
@@ -63,14 +65,11 @@ class SaveTableViewController: UITableViewController {
     }
     
     func fillData(){
-        list.insert("Mac", at: 0)
-        list.insert("Mac", at: 0)
-        list.insert("Mac", at: 0)
-        list.insert("Mac", at: 0)
-        list.insert("Mac", at: 0)
-        list.insert("Mac", at: 0)
-        list.insert("Mac", at: 0)
-        list.insert("Mac", at: 0)
+        let query = Query()
+        query.queryRecommended(limit: 3).observe(.value, with: { snapshot in
+            self.list = query.getItems(snapshot: snapshot)
+            self.tableView.reloadData()
+        })
     }
 
     func addPostBtn(){
@@ -84,6 +83,7 @@ class SaveTableViewController: UITableViewController {
         let postViewController = storyboard.instantiateViewController(withIdentifier: "post")
         navigationController?.pushViewController(postViewController, animated: true)
     }
+    
     
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

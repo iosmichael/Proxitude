@@ -6,6 +6,7 @@ target 'Proxitude' do
   use_frameworks!
     pod 'ImagePicker'
     pod 'Lightbox', git: 'https://github.com/hyperoslo/Lightbox.git', branch: 'swift-3'
+    pod 'JSQMessagesViewController'
     pod 'Firebase/Core'
     pod 'Firebase/Auth'
     pod 'Firebase/Database'

@@ -30,37 +30,15 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? tags.count : items.count
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(indexPath.section == 0 ? tagHeight : itemHeight)
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "By Tags" : "By Title"
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: tagIdentifier, for: indexPath)
-            cell.selectionStyle = .none
-            cell.accessoryType = .disclosureIndicator
-            return cell
-        }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: itemIdentifier, for: indexPath)
-            cell.selectionStyle = .none
-            cell.accessoryType = .disclosureIndicator
-            return cell
-        }
+        return UITableViewCell()
     }
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -76,6 +54,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func setup(){
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
         tableView.register(UINib.init(nibName: "TagTableViewCell", bundle: nil), forCellReuseIdentifier: tagIdentifier)
         tableView.register(UINib.init(nibName: "ItemTableViewCell", bundle: nil), forCellReuseIdentifier: itemIdentifier)
         searchController = UISearchController.init(searchResultsController: SearchResultTableViewController())

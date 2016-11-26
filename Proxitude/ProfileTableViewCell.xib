@@ -63,6 +63,11 @@
                     <constraint firstAttribute="bottomMargin" secondItem="waw-Pq-FNl" secondAttribute="bottom" constant="-1" id="o56-61-xJL"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="email" destination="waw-Pq-FNl" id="i3G-uj-AhA"/>
+                <outlet property="exitIcon" destination="vbg-6m-WyN" id="uuQ-j9-SEs"/>
+                <outlet property="fullName" destination="iis-sW-BL8" id="Crn-6e-Ran"/>
+            </connections>
             <point key="canvasLocation" x="34" y="67"/>
         </tableViewCell>
     </objects>

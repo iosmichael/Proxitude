@@ -12,11 +12,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="39" id="KDp-D9-LGq" customClass="TagTableViewCell" customModule="PostDemo" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="39" id="KDp-D9-LGq" customClass="TagTableViewCell" customModule="Proxitude" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="39"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KDp-D9-LGq" id="37F-5m-Fzx">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="39"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="38"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1X-uj-bp1">
@@ -41,6 +41,10 @@
                     <constraint firstItem="t81-wK-QOC" firstAttribute="top" secondItem="37F-5m-Fzx" secondAttribute="topMargin" constant="-4" id="lR5-AQ-D1p"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="icon" destination="t81-wK-QOC" id="pTd-6E-IgZ"/>
+                <outlet property="tagTitle" destination="k1X-uj-bp1" id="pyb-fR-VEJ"/>
+            </connections>
             <point key="canvasLocation" x="15.5" y="158.5"/>
         </tableViewCell>
     </objects>

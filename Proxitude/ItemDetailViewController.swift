@@ -10,6 +10,8 @@ import UIKit
 
 class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UICollectionViewDataSource,UICollectionViewDelegate{
 
+    var item:Item?
+    
     let imageCollectionIdentifier = "images"
     let imageCellIdentifier = "imageCell"
     let customCellIdentifier = "listCell"
@@ -42,6 +44,7 @@ class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setItem()
         setup()
         setupNav()
         registerCell()
@@ -124,11 +127,19 @@ class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableView
     }
     
     func fillImages(){
-        images.insert(UIImage.init(named: "test-item")!, at: 0)
-        images.insert(UIImage.init(named: "test-item")!, at: 0)
-        images.insert(UIImage.init(named: "test-item")!, at: 0)
-        images.insert(UIImage.init(named: "test-item")!, at: 0)
-        images.insert(UIImage.init(named: "test-item")!, at: 0)
+        for url in (item?.imagesURL)!{
+            if let imageURL = URL.init(string: url){
+                do {
+                    let imageData = try Data.init(contentsOf: imageURL)
+                    images.insert(UIImage.init(data: imageData)!, at: images.count)
+                } catch {
+                    images.insert(UIImage.init(named: "test-item")!, at: 0)
+                }
+            }else{
+                images.insert(UIImage.init(named: "test-item")!, at: 0)
+            }
+            tableView.reloadData()
+        }
     }
     
     
@@ -182,6 +193,15 @@ class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableView
     
     override func viewWillDisappear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = false
+    }
+    
+    func setItem(){
+        list = [(cellType.SVLL,"Title",(item?.name)!),
+                    (cellType.SVLL,"Price",(item?.price)!),
+                    (cellType.SVLL,"Description",(item?.detail)!)]
+        for (field,input) in (item?.fields)! {
+            list.insert((cellType.SVLL,field,input), at: list.count)
+        }
     }
     
     /*

@@ -10,6 +10,12 @@ import UIKit
 
 class ItemTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var thumbnail: UIImageView!
+    @IBOutlet weak var itemTitle: UILabel!
+    @IBOutlet weak var itemPrice: UILabel!
+    @IBOutlet weak var itemDate: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -21,10 +27,37 @@ class ItemTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func setupCell(icon:UIImage,title:String,price:String,date:String){
+        self.thumbnail.image = icon
+        self.itemTitle.text = title
+        self.itemPrice.text = price
+        self.itemDate.text = date
+    }
+    
+    func setItem(item:Item){
+        print(item.name)
+        self.itemTitle.text = item.name
+        self.itemPrice.text = item.price
+        downloadImage(imageURL: item.thumbnail!)
+    }
+    
+    func downloadImage(imageURL:String){
+        if let url = NSURL(string: imageURL) {
+            if let data = NSData(contentsOf: url as URL) {
+                self.thumbnail.image = UIImage.init(data: data as Data)
+                self.setNeedsLayout()
+            }        
+        }
+    }
+    
 }
 
 
 class TagTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var icon: UIImageView!
+    @IBOutlet weak var tagTitle: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,6 +68,11 @@ class TagTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
+    }
+    
+    func setIconTag(icon:UIImage,tag:String){
+        self.icon.image = icon
+        self.tagTitle.text = tag
     }
     
 }

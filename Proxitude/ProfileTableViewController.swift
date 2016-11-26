@@ -14,7 +14,7 @@ class ProfileTableViewController: UITableViewController {
     let contactCellIdentifier = "contactCell"
     let tagCellHeight: CGFloat = 44
     let contactCellHeight: CGFloat = 70
-    var list = [String]()
+    var list = [(UIImage,String)]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,8 +57,9 @@ class ProfileTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: contactCellIdentifier, for: indexPath)
             return cell
         }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: tagCellIdentifier, for: indexPath)
+            let cell:TagTableViewCell = tableView.dequeueReusableCell(withIdentifier: tagCellIdentifier, for: indexPath) as! TagTableViewCell
             cell.accessoryType = .disclosureIndicator
+            cell.setIconTag(icon: list[indexPath.row].0, tag: list[indexPath.row].1)
             return cell
         }
     }
@@ -69,13 +70,12 @@ class ProfileTableViewController: UITableViewController {
     }
     
     func fillData(){
-        list.insert("Mac", at: 0)
-        list.insert("Mac", at: 0)
-        list.insert("Mac", at: 0)
-        list.insert("Mac", at: 0)
-        list.insert("Mac", at: 0)
-        list.insert("Mac", at: 0)
-        list.insert("Mac", at: 0)
+        list.insert((UIImage.init(named: "tagIcon")!,"Test-Login-Page"), at: 0)
+        list.insert((UIImage.init(named: "tagIcon")!,"Report a Problem"), at: 0)
+        list.insert((UIImage.init(named: "tagIcon")!,"About"), at: 0)
+        list.insert((UIImage.init(named: "tagIcon")!,"Messages"), at: 0)
+        list.insert((UIImage.init(named: "tagIcon")!,"QR Scanner"), at: 0)
+        list.insert((UIImage.init(named: "tagIcon")!,"My Items"), at: 0)
     }
     
     func addPostBtn(){

@@ -10,4 +10,5 @@
 #define Proxitude_Bridging_Header_h
 
 #import <GoogleSignIn/GoogleSignIn.h>
+#import <JSQMessagesViewController/JSQMessages.h>
 #endif /* Proxitude_Bridging_Header_h */

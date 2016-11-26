@@ -12,11 +12,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="55" id="iwd-RP-wSP" customClass="ItemTableViewCell" customModule="PostDemo" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="55" id="iwd-RP-wSP" customClass="ItemTableViewCell" customModule="Proxitude" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="309" height="55"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iwd-RP-wSP" id="yOQ-gg-X2U">
-                <rect key="frame" x="0.0" y="0.0" width="309" height="54"/>
+                <rect key="frame" x="0.0" y="0.0" width="309" height="54.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="test-item" translatesAutoresizingMaskIntoConstraints="NO" id="QtF-Og-mDb">
@@ -60,6 +60,12 @@
                     <constraint firstItem="QtF-Og-mDb" firstAttribute="top" secondItem="yOQ-gg-X2U" secondAttribute="topMargin" constant="-4" id="yWZ-uy-8c8"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="itemDate" destination="sAO-GK-wh3" id="Rxn-JM-xIM"/>
+                <outlet property="itemPrice" destination="zko-CM-Zw7" id="3wY-g7-A26"/>
+                <outlet property="itemTitle" destination="dmo-t8-9pl" id="jCN-aY-QJd"/>
+                <outlet property="thumbnail" destination="QtF-Og-mDb" id="uXe-Tb-x1s"/>
+            </connections>
             <point key="canvasLocation" x="-19.5" y="21.5"/>
         </tableViewCell>
     </objects>

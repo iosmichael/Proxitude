@@ -11,12 +11,17 @@ import Firebase
 
 class Item: NSObject {
     let storageURL = "gs://dazzling-fire-5565.appspot.com"
-    let username = "michael.liu@my.wheaton.edu"
+    let username = "michaelliu@mywheatonedu"
     
-    var name:String?
-    var price:String?
-    var detail:String?
+    var name:String!
+    var price:String!
+    var detail:String!
+    var thumbnail:String!
+    var user:String!
+    var imagesURL = [String]()
+    
     var fields = [(String,String)]()
+    //below for post
     var tags = [String]()
     var images = [UIImage]()
     var ref: FIRDatabaseReference? = FIRDatabase.database().reference().child("wheaton-college")
@@ -42,28 +47,41 @@ class Item: NSObject {
         let itemsNode = ref?.child("items").childByAutoId()
         let usersNode = ref?.child("users").child(username).child("items").childByAutoId()
         let categoriesNode = ref?.child("tags")
-        
+        FIRAuth.auth()?.signInAnonymously() { (user, error) in
+            if let error = error {
+                print(error)
+            }
+        }
         let autoId = itemsNode?.key
         usersNode?.setValue(autoId)
-        var imagesURL = [String]()
         for i in 0...images.count-1{
-            let data = UIImageJPEGRepresentation(images[i], 0.5)
-            let picRef = storageRef?.child("\(autoId)-image-\(i).jpg")
-            picRef?.put(data!, metadata: nil) { metadata, error in
+            //let data = UIImageJPEGRepresentation(images[i], 0.8)
+            let data = UIImageJPEGRepresentation(UIImage.init(named: "pic")!, 0.8)
+            let picRef = storageRef?.child("images/\(autoId)-image-\(i).jpg")
+            let metaData = FIRStorageMetadata()
+            metaData.contentType = "image/jpg"
+            picRef?.put(data!, metadata: metaData) { metadata, error in
                 if (error != nil) {
+                    print(error!)
                     // Uh-oh, an error occurred!
-                } else {
-                    // Metadata contains file metadata such as size, content-type, and download URL.
-                    imagesURL.insert("\(metadata!.downloadURL)", at: 0)
                 }
+                let downloadURL:String = (metadata!.downloadURL()?.absoluteString)!
+                    // Metadata contains file metadata such as size, content-type, and download URL.
+                if i == 0 {
+                    itemsNode?.child("thumbnail").setValue("\(downloadURL)")
+                }
+                itemsNode?.child("images/image-\(i)").setValue("\(downloadURL)")
             }
         }
         
-        var posts = ["name":name!, "price":price!, "detail":detail!, "user":username, "images":imagesURL] as [String : Any]
+        //#warning - Need dates! here!
+        
+        var posts = ["name":name!, "price":price!, "detail":detail!, "user":username] as [String : Any]
         for (field, input) in fields{
             posts[field] = input
         }
-        itemsNode?.setValue(posts)
+        print("post data here: ------>\(posts)")
+        itemsNode?.updateChildValues(posts)
         
         for tag in tags{
             //category links

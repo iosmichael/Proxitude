@@ -13,7 +13,7 @@ class HomeTableViewController: UITableViewController {
     let itemCellIdentifier = "itemCell"
     let itemCellHeight: CGFloat = 55
     let bannerHeight:CGFloat = 120
-    var list = [String]()
+    var list = [Item]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +48,9 @@ class HomeTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: itemCellIdentifier, for: indexPath)
+        let cell:ItemTableViewCell = tableView.dequeueReusableCell(withIdentifier: itemCellIdentifier, for: indexPath) as! ItemTableViewCell
+        let item = list[indexPath.row]
+        cell.setItem(item: item)
         cell.accessoryType = .disclosureIndicator
         cell.selectionStyle = .none
         return cell
@@ -56,7 +58,8 @@ class HomeTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let itemDetailController = storyboard.instantiateViewController(withIdentifier: "itemDetail")
+        let itemDetailController:ItemDetailViewController = storyboard.instantiateViewController(withIdentifier: "itemDetail") as! ItemDetailViewController
+        itemDetailController.item = list[indexPath.row]
         navigationController?.pushViewController(itemDetailController, animated: true)
     }
     
@@ -67,14 +70,11 @@ class HomeTableViewController: UITableViewController {
     }
 
     func fillData(){
-        list.insert("Mac", at: 0)
-        list.insert("Mac", at: 0)
-        list.insert("Mac", at: 0)
-        list.insert("Mac", at: 0)
-        list.insert("Mac", at: 0)
-        list.insert("Mac", at: 0)
-        list.insert("Mac", at: 0)
-        list.insert("Mac", at: 0)
+        let query = Query()
+        query.queryRecommended(limit: 3).observe(.value, with: { snapshot in
+            self.list = query.getItems(snapshot: snapshot)
+            self.tableView.reloadData()
+        })
     }
 
     func addPostBtn(){

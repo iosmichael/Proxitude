@@ -12,11 +12,13 @@ class ChooseTagsTableViewController: UITableViewController , SelectTagCellProtoc
     
     var selectedTagList = [String]()
     var tagList = [String]()
+    weak var parentC: PostItemViewController?
     let selectTagCellIdentifier = "SelectTagCell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        setupNav()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -89,6 +91,17 @@ class ChooseTagsTableViewController: UITableViewController , SelectTagCellProtoc
             }
         }
     }
+    
+    func setupNav(){
+        let navLeftBtn = UIBarButtonItem.init(title: "Done", style: .done, target: self, action: #selector(dismissCurrent))
+        navigationItem.leftBarButtonItem = navLeftBtn
+        navigationItem.leftBarButtonItem?.tintColor = UIColor.white
+    }
+    
+    func dismissCurrent(){
+        self.navigationController?.popViewController(animated: true)
+    }
+
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
