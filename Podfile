@@ -16,6 +16,10 @@ target 'Proxitude' do
 
   target 'ProxitudeTests' do
     inherit! :search_paths
+    pod 'Firebase/Core'
+    pod 'Firebase/Auth'
+    pod 'Firebase/Database'
+    pod 'Firebase/Storage'
     # Pods for testing
   end
 

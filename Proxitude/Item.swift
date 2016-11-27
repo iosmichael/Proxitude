@@ -46,7 +46,6 @@ class Item: NSObject {
         storageRef = FIRStorage.storage().reference(forURL: storageURL)
         let itemsNode = ref?.child("items").childByAutoId()
         let usersNode = ref?.child("users").child(username).child("items").childByAutoId()
-        let categoriesNode = ref?.child("tags")
         FIRAuth.auth()?.signInAnonymously() { (user, error) in
             if let error = error {
                 print(error)
@@ -76,7 +75,7 @@ class Item: NSObject {
         
         //#warning - Need dates! here!
         
-        var posts = ["name":name!, "price":price!, "detail":detail!, "user":username] as [String : Any]
+        var posts = ["name":name!, "price":price!, "detail":detail!, "user":username, "date":Date.convertDateToString(Date())] as [String : Any]
         for (field, input) in fields{
             posts[field] = input
         }
@@ -85,7 +84,7 @@ class Item: NSObject {
         
         for tag in tags{
             //category links
-            categoriesNode?.child(tag).childByAutoId().setValue(autoId)
+            itemsNode?.child("tags").childByAutoId().setValue(tag)
         }
         
     }
@@ -95,4 +94,18 @@ class Item: NSObject {
     }
     
     
+}
+
+extension Date{
+    func convertDateToString(date:Date)->String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: date)
+    }
+    
+    func convertStringToDate(date:String)->Date{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.date(from: date)!
+    }
 }

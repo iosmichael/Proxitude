@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9831A8B049551F94692EB5A7D73B7F0E"
-               BuildableName = "Pods_ProxitudeTests.framework"
-               BlueprintName = "Pods-ProxitudeTests"
+               BlueprintIdentifier = "E507D935FF66A66E1086B64CA3096F35"
+               BuildableName = "GTMSessionFetcher.framework"
+               BlueprintName = "GTMSessionFetcher.default-Core"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9831A8B049551F94692EB5A7D73B7F0E"
-            BuildableName = "Pods_ProxitudeTests.framework"
-            BlueprintName = "Pods-ProxitudeTests"
+            BlueprintIdentifier = "E507D935FF66A66E1086B64CA3096F35"
+            BuildableName = "GTMSessionFetcher.framework"
+            BlueprintName = "GTMSessionFetcher.default-Core"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

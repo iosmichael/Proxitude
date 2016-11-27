@@ -12,9 +12,9 @@ import XCTest
 
 class ProxitudeTests: XCTestCase {
     
+    let query = Query()
     override func setUp() {
         super.setUp()
-        
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
@@ -26,6 +26,18 @@ class ProxitudeTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        query.queryRecommended(limit: 5).observe(.value, with: {
+            snapshot in
+            print("snapshot ------------> \(snapshot)")
+            print ("Items -----------------> \(self.query.getItems(snapshot: snapshot))")
+        })
+        
+        query.queryItemByUser(limit: 3, user: "michaelliu@mywheatonedu").observe(.value, with: {
+            snapshot in
+            print("snapshot ------------> \(snapshot)")
+            print ("Items -----------------> \(self.query.getItems(snapshot: snapshot))")
+        })
+        
     }
     
     func testPerformanceExample() {
