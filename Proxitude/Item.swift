@@ -13,12 +13,15 @@ class Item: NSObject {
     let storageURL = "gs://dazzling-fire-5565.appspot.com"
     let username = "michaelliu@mywheatonedu"
     
+    var itemId:String!
     var name:String!
     var price:String!
     var detail:String!
+    var date: String!
     var thumbnail:String!
     var user:String!
     var imagesURL = [String]()
+    var sell = true
     
     var fields = [(String,String)]()
     //below for post
@@ -27,13 +30,15 @@ class Item: NSObject {
     var ref: FIRDatabaseReference? = FIRDatabase.database().reference().child("wheaton-college")
     var storageRef: FIRStorageReference?
     
-    func postData(name:String,price:String,detail:String,tags:[String],images:[UIImage],fields:[(String,String)]){
+    func postData(type:Bool, name:String,price:String,detail:String,tags:[String],images:[UIImage],fields:[(String,String)],user:String){
         self.name = name
         self.price = price
         self.detail = detail
         self.fields = fields
         self.tags = tags
         self.images = images
+        self.user = user
+        self.sell = true
         writeItem()
     }
     
@@ -46,6 +51,7 @@ class Item: NSObject {
         storageRef = FIRStorage.storage().reference(forURL: storageURL)
         let itemsNode = ref?.child("items").childByAutoId()
         let usersNode = ref?.child("users").child(username).child("items").childByAutoId()
+        
         FIRAuth.auth()?.signInAnonymously() { (user, error) in
             if let error = error {
                 print(error)
@@ -53,40 +59,41 @@ class Item: NSObject {
         }
         let autoId = itemsNode?.key
         usersNode?.setValue(autoId)
-        for i in 0...images.count-1{
-            //let data = UIImageJPEGRepresentation(images[i], 0.8)
-            let data = UIImageJPEGRepresentation(UIImage.init(named: "pic")!, 0.8)
-            let picRef = storageRef?.child("images/\(autoId)-image-\(i).jpg")
-            let metaData = FIRStorageMetadata()
-            metaData.contentType = "image/jpg"
-            picRef?.put(data!, metadata: metaData) { metadata, error in
-                if (error != nil) {
-                    print(error!)
-                    // Uh-oh, an error occurred!
-                }
-                let downloadURL:String = (metadata!.downloadURL()?.absoluteString)!
+        if sell{
+            for i in 0...images.count-1{
+                //let data = UIImageJPEGRepresentation(images[i], 0.8)
+                let data = UIImageJPEGRepresentation(UIImage.init(named: "pic")!, 0.8)
+                let picRef = storageRef?.child("images/\(autoId)-image-\(i).jpg")
+                let metaData = FIRStorageMetadata()
+                metaData.contentType = "image/jpg"
+                picRef?.put(data!, metadata: metaData) { metadata, error in
+                    if (error != nil) {
+                        print(error!)
+                        // Uh-oh, an error occurred!
+                    }
+                    let downloadURL:String = (metadata!.downloadURL()?.absoluteString)!
                     // Metadata contains file metadata such as size, content-type, and download URL.
-                if i == 0 {
-                    itemsNode?.child("thumbnail").setValue("\(downloadURL)")
+                    if i == 0 {
+                        itemsNode?.child("thumbnail").setValue("\(downloadURL)")
+                    }
+                    itemsNode?.child("images/image-\(i)").setValue("\(downloadURL)")
                 }
-                itemsNode?.child("images/image-\(i)").setValue("\(downloadURL)")
             }
         }
-        
         //#warning - Need dates! here!
-        
-        var posts = ["name":name!, "price":price!, "detail":detail!, "user":username, "date":Date.convertDateToString(Date())] as [String : Any]
+        let currentDate: Date = Date()
+        let dateString: String = currentDate.convertDateToString()
+        var posts = ["name":name!, "price":price!, "detail":detail!, "user":username, "date":dateString, "sell":sell] as [String : Any]
         for (field, input) in fields{
             posts[field] = input
+            print("\(field):\(input)")
         }
         print("post data here: ------>\(posts)")
         itemsNode?.updateChildValues(posts)
-        
         for tag in tags{
             //category links
-            itemsNode?.child("tags").childByAutoId().setValue(tag)
+            itemsNode?.child("tags").child(tag).setValue(1)
         }
-        
     }
     
     func save(itemID:String){
@@ -97,10 +104,10 @@ class Item: NSObject {
 }
 
 extension Date{
-    func convertDateToString(date:Date)->String{
+    func convertDateToString()->String{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.string(from: date)
+        return dateFormatter.string(from: self)
     }
     
     func convertStringToDate(date:String)->Date{

@@ -15,11 +15,9 @@ class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableView
     let imageCollectionIdentifier = "images"
     let imageCellIdentifier = "imageCell"
     let customCellIdentifier = "listCell"
-    let contactCellIdentifier = "contactCell"
     var images = [UIImage]()
     
     let imageCollectionCellHeight:CGFloat = 100
-    let contactCellHeight: CGFloat = 80
     let customListCellHeight:CGFloat = 44
     
     enum cellType {
@@ -51,7 +49,7 @@ class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableView
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -64,8 +62,6 @@ class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableView
             return imageCollectionCellHeight
         case 1:
             return CustomTableViewCell.dynamicHeight(label: list[indexPath.row].1, input: list[indexPath.row].2)
-        case 2:
-            return contactCellHeight
         default:
             return 0
         }
@@ -75,14 +71,10 @@ class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableView
         if indexPath.section == 0 {
             let cell:ImagesTableViewCell = tableView.dequeueReusableCell(withIdentifier: imageCellIdentifier) as! ImagesTableViewCell
             return cell
-        }else if indexPath.section == 1{
+        }else{
             let cell:CustomTableViewCell = tableView.dequeueReusableCell(withIdentifier: customCellIdentifier) as! CustomTableViewCell
             let (type,L1,L2) = list[indexPath.row]
             fill(cell: cell,type: type,L1: L1,L2: L2)
-            return cell
-        }else{
-            let cell:ContactTableViewCell = tableView.dequeueReusableCell(withIdentifier: contactCellIdentifier) as! ContactTableViewCell
-            cell.accessoryType = .disclosureIndicator
             return cell
         }
     }
@@ -115,7 +107,6 @@ class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableView
     func registerCell(){
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: customCellIdentifier)
         tableView.register(ImagesTableViewCell.self, forCellReuseIdentifier: imageCellIdentifier)
-        tableView.register(UINib.init(nibName: "ContactTableViewCell", bundle: nil), forCellReuseIdentifier: contactCellIdentifier)
         tableView.separatorStyle = .none
     }
     
@@ -198,7 +189,9 @@ class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableView
     func setItem(){
         list = [(cellType.SVLL,"Title",(item?.name)!),
                     (cellType.SVLL,"Price",(item?.price)!),
-                    (cellType.SVLL,"Description",(item?.detail)!)]
+                    (cellType.SVLL,"Description",(item?.detail)!),
+                    (cellType.SVLL,"Email",(item?.user)!)]
+        
         for (field,input) in (item?.fields)! {
             list.insert((cellType.SVLL,field,input), at: list.count)
         }

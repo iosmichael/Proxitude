@@ -199,7 +199,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Zr7-hm-9b5" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Search" image="search" selectedImage="search-active" id="06i-H2-bIe"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3M9-6O-Lxm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3M9-6O-Lxm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -11,11 +11,13 @@ import Firebase
 
 class Query: NSObject {
     
+    var userRef:FIRDatabaseReference?
     var itemRef:FIRDatabaseReference?
     
     override init() {
         super.init()
         itemRef = FIRDatabase.database().reference().child("wheaton-college/items")
+        userRef = FIRDatabase.database().reference().child("wheaton-college/users")
     }
     
     func queryRecommended(limit:Int)->FIRDatabaseQuery{
@@ -23,11 +25,36 @@ class Query: NSObject {
     }
     
     func queryByCategory(limit:Int,category:String)->FIRDatabaseQuery{
-        return (itemRef?.queryOrdered(byChild: "tags").queryEqual(toValue: category).queryLimited(toLast: UInt(limit)))!
+        return (itemRef?.queryOrdered(byChild: "tags/\(category)").queryEqual(toValue: "1").queryLimited(toLast: UInt(limit)))!
     }
     
     func queryItemByUser(limit:Int, user:String)->FIRDatabaseQuery{
         return (itemRef?.queryLimited(toLast: UInt(limit)).queryOrdered(byChild: "user").queryEqual(toValue: user))!
+    }
+    
+    func queryBySearchStr(limit:Int, query:String)->FIRDatabaseQuery{
+        return (itemRef?.queryLimited(toLast: UInt(limit)).queryOrdered(byChild: "title").queryStarting(atValue: query))!
+    }
+    
+    func getUser(uid:String)->Contact{
+        let user = Contact()
+        user.uid = uid
+        userRef?.child(uid).observeSingleEvent(of: .value, with: {
+            snapshot in
+            for child:FIRDataSnapshot in snapshot.children.allObjects as! [FIRDataSnapshot]{
+                switch child.key{
+                case "fullName":
+                    user.fullName = child.value as! String!
+                break
+                case "email":
+                    user.fullName = child.value as! String!
+                break
+                default:
+                    break
+                }
+            }
+        })
+        return user
     }
     
     //items snapshot
@@ -59,6 +86,13 @@ class Query: NSObject {
                         item.imagesURL.insert(url.value, at: item.imagesURL.count)
                     }
                     break
+                case  "date":
+                    item.date = elem.value as! String!
+                break
+                case "tags":
+                break
+                case "sell":
+                break
                 default:
                     let tuple = ("\(elem.key)", "\(elem.value!)")
                     item.fields.insert(tuple, at: item.fields.count)
@@ -66,7 +100,7 @@ class Query: NSObject {
                 }
             }
             print("fields: \(item.fields), imagesURL: \(item.imagesURL), name: \(item.name)")
-            items.insert(item, at: items.count)
+            items.insert(item, at: 0)
         }
         return items
     }
@@ -97,6 +131,13 @@ class Query: NSObject {
                     for url in elem.value as! [String:String] {
                         item.imagesURL.insert(url.value, at: item.imagesURL.count)
                     }
+                    break
+                case "date":
+                    item.date = elem.value as! String!
+                    break
+                case "tags":
+                    break
+                case "sell":
                     break
                 default:
                     let tuple = ("\(elem.key)", "\(elem.value!)")

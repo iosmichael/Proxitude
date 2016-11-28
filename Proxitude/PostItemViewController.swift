@@ -18,15 +18,17 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
     let imageCollectionCellHeight:CGFloat = 100
     let customListCellHeight:CGFloat = 44
     
-    let tagSelectorIndex = 3
-    let detailControllerIndex = 2
+    var tagSelectorIndex = 3
+    var detailControllerIndex = 2
     
     var tags = [String]()
     var images = [UIImage]()
     var fields = [(String,String)]()
     var itemTitle: UITextField?
     var price: UITextField?
-    var detail: String?
+    var detail = ""
+    
+    var request = true
     
     enum cellType {
         case LL
@@ -40,12 +42,15 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
                 (cellType.LL,"Tags","(Required)"),
                 (cellType.CII,"Field","Value")]
     
+    
     @IBOutlet weak var tableview: UITableView!
 
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupColumn()
         setupNav()
         addPhotoBtn()
         tableview.delegate = self
@@ -69,7 +74,13 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1: list.count
+        if section == 0{
+            if !request{
+                return 0
+            }
+            return 1
+        }
+        return list.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -82,6 +93,13 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
             cell.delegate = self
             let (type,L1,L2) = list[indexPath.row]
             fill(cell: cell,type: type,L1: L1,L2: L2)
+            
+            if indexPath.row == 0{
+                itemTitle = cell.rightInput
+            }else if indexPath.row == 1{
+                price = cell.rightInput
+            }
+            
             return cell
         }
     }
@@ -111,6 +129,7 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == tagSelectorIndex{
             let tagSelectorController = ChooseTagsTableViewController()
+            tagSelectorController.parentC = self
             navigationController?.pushViewController(tagSelectorController, animated: true)
         }else if indexPath.row == detailControllerIndex{
             let detailController = DetailController()
@@ -163,14 +182,49 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
     func submit(){
 //        let item = Item()
 //        item.postData(name: "Macbook", price: "$18.00", detail: "This Macbook is for sale", tags: ["Electronic"], images: images, fields: fields)
-        
-        navigationController?.popViewController(animated: true)
+        let valid:Bool = submitValidator()
+        if valid {
+            print(valid)
+            let item = Item()
+            images.removeLast()
+            item.postData(type:request, name: (itemTitle?.text)!, price: (price?.text)!, detail: detail, tags: tags, images: images, fields: fields, user: "michaelliu@mywheatonedu")
+            print("item fields: \(fields)")
+            navigationController?.popViewController(animated: true)
+        }else{
+            print("didnt pass")
+        }
+    }
+    
+    func submitValidator() -> Bool{
+        var messages = [String]()
+        if !request {
+            if (images.count == 1){
+                messages.insert("At least one image is required", at: messages.count)
+            }
+        }
+        if (itemTitle?.text?.isEmpty)!{
+            messages.insert("Title cannot be empty", at: messages.count)
+        }
+        if !request{
+            if (price?.text?.isEmpty)!{
+                messages.insert("Price cannot be empty", at: messages.count)
+            }
+        }
+        if (detail.isEmpty){
+            messages.insert("Detail field cannot be empty", at: messages.count)
+        }
+        if (tags.count == 0){
+            messages.insert("At least one tag is required", at: messages.count)
+        }
+        print(messages)
+        return messages.count == 0
     }
     
     func addBtn(label:String, input:String){
         //add new field
         print("add item \(label) : \(input) ")
         list.insert((cellType.CLL,label,input), at: list.count)
+        fields.insert((label,input), at: fields.count)
         self.tableview.reloadData()
     }
     
@@ -184,6 +238,17 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
         images.remove(at: sender.tag)
         sender.removeFromSuperview()
         tableview.reloadData()
+    }
+    
+    func setupColumn(){
+        if !request {
+            list = [(cellType.LI,"Title","Item Title"),
+                    (cellType.LL,"Detail","(Required)"),
+                    (cellType.LL,"Tags","(Required)"),
+                    (cellType.CII,"Field","Value")]
+            self.detailControllerIndex = 1
+            self.tagSelectorIndex = 2
+        }
     }
     
     func fill(cell:CustomTableViewCell,type:cellType, L1:String, L2:String){
@@ -205,11 +270,14 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     func fillDetail(detail:String){
         list[detailControllerIndex] = (cellType.LL,"Detail",detail)
+        self.detail = detail
+        print("Detail: \(detail)")
         tableview.reloadData()
     }
     
     func fillTags(tags:[String]){
         self.tags = tags
+        list[tagSelectorIndex] = (cellType.LL,"Tags",tags.joined(separator: ", "))
         tableview.reloadData()
     }
     
@@ -289,5 +357,6 @@ class DetailController:UIViewController{
         parentC?.fillDetail(detail: (textView?.text)!)
         self.navigationController?.popViewController(animated: true)
     }
+    
 }
 

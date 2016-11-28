@@ -12,40 +12,41 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="39" id="KDp-D9-LGq" customClass="TagTableViewCell" customModule="Proxitude" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="39"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="37" id="KDp-D9-LGq" customClass="TagTableViewCell" customModule="Proxitude" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="37"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KDp-D9-LGq" id="37F-5m-Fzx">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="38"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="36.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1X-uj-bp1">
-                        <rect key="frame" x="53" y="7.5" width="36" height="23.5"/>
+                        <rect key="frame" x="48" y="8" width="36" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tagIcon" translatesAutoresizingMaskIntoConstraints="NO" id="t81-wK-QOC">
-                        <rect key="frame" x="8" y="4" width="30" height="30"/>
+                        <rect key="frame" x="18" y="11" width="15" height="15"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="30" id="TUT-bF-w4J"/>
+                            <constraint firstAttribute="width" constant="15" id="TUT-bF-w4J"/>
+                            <constraint firstAttribute="height" constant="15" id="YRI-gy-hNR"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="k1X-uj-bp1" firstAttribute="leading" secondItem="t81-wK-QOC" secondAttribute="trailing" constant="15" id="7NE-3C-4fP"/>
                     <constraint firstItem="k1X-uj-bp1" firstAttribute="centerY" secondItem="37F-5m-Fzx" secondAttribute="centerY" id="9dq-K3-1Vc"/>
+                    <constraint firstItem="t81-wK-QOC" firstAttribute="centerY" secondItem="37F-5m-Fzx" secondAttribute="centerY" id="A41-eg-ZVX"/>
                     <constraint firstItem="t81-wK-QOC" firstAttribute="centerY" secondItem="37F-5m-Fzx" secondAttribute="centerY" id="Qx7-Mi-lX2"/>
-                    <constraint firstItem="t81-wK-QOC" firstAttribute="leading" secondItem="37F-5m-Fzx" secondAttribute="leadingMargin" id="UBb-oK-tTr"/>
+                    <constraint firstItem="t81-wK-QOC" firstAttribute="leading" secondItem="37F-5m-Fzx" secondAttribute="leadingMargin" constant="10" id="UBb-oK-tTr"/>
                     <constraint firstItem="k1X-uj-bp1" firstAttribute="bottom" secondItem="37F-5m-Fzx" secondAttribute="bottomMargin" id="bhT-2v-Ddo"/>
-                    <constraint firstItem="t81-wK-QOC" firstAttribute="top" secondItem="37F-5m-Fzx" secondAttribute="topMargin" constant="-4" id="lR5-AQ-D1p"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="icon" destination="t81-wK-QOC" id="pTd-6E-IgZ"/>
                 <outlet property="tagTitle" destination="k1X-uj-bp1" id="pyb-fR-VEJ"/>
             </connections>
-            <point key="canvasLocation" x="15.5" y="158.5"/>
+            <point key="canvasLocation" x="15.5" y="157.5"/>
         </tableViewCell>
     </objects>
     <resources>

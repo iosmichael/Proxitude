@@ -66,7 +66,7 @@ class SaveTableViewController: UITableViewController {
     
     func fillData(){
         let query = Query()
-        query.queryItemByUser(limit: 3, user: "michaelliu@mywheatonedu").observe(.value, with: { snapshot in
+        query.queryByCategory(limit: 1, category: "Electronic").observe(.value, with: { snapshot in
             self.list = query.getItems(snapshot: snapshot)
             self.tableView.reloadData()
         })

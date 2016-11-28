@@ -43,6 +43,7 @@
 		9E59FC961DE4FD67000DF062 /* ProxitudeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E59FC951DE4FD67000DF062 /* ProxitudeUITests.swift */; };
 		9E69B4AB1DE9671700AAAC0C /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E69B4AA1DE9671700AAAC0C /* Query.swift */; };
 		9E69B4AD1DE9755D00AAAC0C /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E69B4AC1DE9755D00AAAC0C /* Contact.swift */; };
+		9EB0DB3E1DEC01780004EDE3 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB0DB3D1DEC01780004EDE3 /* CategoryTableViewController.swift */; };
 		9EEDD3F51DE93106007D7D58 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEDD3F41DE93106007D7D58 /* Item.swift */; };
 		9EEDD3F71DE93187007D7D58 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EEDD3F61DE93187007D7D58 /* GoogleService-Info.plist */; };
 		D36C4FAD2B6773CA3D9606A3 /* Pods_ProxitudeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2A57A340003F250F1EF544 /* Pods_ProxitudeTests.framework */; };
@@ -108,6 +109,7 @@
 		9E59FC971DE4FD67000DF062 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E69B4AA1DE9671700AAAC0C /* Query.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		9E69B4AC1DE9755D00AAAC0C /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		9EB0DB3D1DEC01780004EDE3 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		9EEDD3F41DE93106007D7D58 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		9EEDD3F61DE93187007D7D58 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9EEDD4031DE936C1007D7D58 /* Proxitude-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Proxitude-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -167,8 +169,9 @@
 			children = (
 				9E5130521DE8CBD60014140B /* MasterViewController.swift */,
 				9E486C811DE8E000003CDBBE /* HomeTableViewController.swift */,
-				9E0CD0081DE8EB51000C1FF9 /* SaveTableViewController.swift */,
 				9E5130551DE8CBD70014140B /* SearchViewController.swift */,
+				9EB0DB3D1DEC01780004EDE3 /* CategoryTableViewController.swift */,
+				9E0CD0081DE8EB51000C1FF9 /* SaveTableViewController.swift */,
 				9E5130541DE8CBD70014140B /* SearchResultTableViewController.swift */,
 				9E0CD00A1DE8EB64000C1FF9 /* ProfileTableViewController.swift */,
 				9E51304D1DE8CBD60014140B /* ItemDetailViewController.swift */,
@@ -599,6 +602,7 @@
 				9E5130631DE8CBD70014140B /* SearchResultTableViewController.swift in Sources */,
 				9E5130571DE8CBD70014140B /* CustomTableViewCell.swift in Sources */,
 				9E486C821DE8E000003CDBBE /* HomeTableViewController.swift in Sources */,
+				9EB0DB3E1DEC01780004EDE3 /* CategoryTableViewController.swift in Sources */,
 				9E0CD0111DE92307000C1FF9 /* ChooseTagsTableViewController.swift in Sources */,
 				9EEDD3F51DE93106007D7D58 /* Item.swift in Sources */,
 				9E51305F1DE8CBD70014140B /* LogInViewController.swift in Sources */,

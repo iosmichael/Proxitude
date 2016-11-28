@@ -12,7 +12,7 @@ class ProfileTableViewController: UITableViewController {
 
     let tagCellIdentifier = "tagCell"
     let contactCellIdentifier = "contactCell"
-    let tagCellHeight: CGFloat = 44
+    let tagCellHeight: CGFloat = 37
     let contactCellHeight: CGFloat = 70
     var list = [(UIImage,String)]()
     
@@ -55,10 +55,12 @@ class ProfileTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: contactCellIdentifier, for: indexPath)
+            cell.selectionStyle = .none
             return cell
         }else{
             let cell:TagTableViewCell = tableView.dequeueReusableCell(withIdentifier: tagCellIdentifier, for: indexPath) as! TagTableViewCell
             cell.accessoryType = .disclosureIndicator
+            cell.selectionStyle = .none
             cell.setIconTag(icon: list[indexPath.row].0, tag: list[indexPath.row].1)
             return cell
         }
@@ -70,12 +72,12 @@ class ProfileTableViewController: UITableViewController {
     }
     
     func fillData(){
-        list.insert((UIImage.init(named: "tagIcon")!,"Test-Login-Page"), at: 0)
-        list.insert((UIImage.init(named: "tagIcon")!,"Report a Problem"), at: 0)
-        list.insert((UIImage.init(named: "tagIcon")!,"About"), at: 0)
-        list.insert((UIImage.init(named: "tagIcon")!,"Messages"), at: 0)
-        list.insert((UIImage.init(named: "tagIcon")!,"QR Scanner"), at: 0)
-        list.insert((UIImage.init(named: "tagIcon")!,"My Items"), at: 0)
+        list.insert((UIImage.init(named: "login")!,"Test-Login-Page"), at: 0)
+        list.insert((UIImage.init(named: "report")!,"Report a Problem"), at: 0)
+        list.insert((UIImage.init(named: "facebook")!,"About"), at: 0)
+        list.insert((UIImage.init(named: "message")!,"Messages"), at: 0)
+        list.insert((UIImage.init(named: "scanner")!,"QR Scanner"), at: 0)
+        list.insert((UIImage.init(named: "myItem")!,"My Items"), at: 0)
     }
     
     func addPostBtn(){

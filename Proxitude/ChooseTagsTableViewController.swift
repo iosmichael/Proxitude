@@ -11,7 +11,7 @@ import UIKit
 class ChooseTagsTableViewController: UITableViewController , SelectTagCellProtocol{
     
     var selectedTagList = [String]()
-    var tagList = [String]()
+    var tagList = ["Sport Gears","Clothing","Furniture","Electronics","Entertainment","Textbook"]
     weak var parentC: PostItemViewController?
     let selectTagCellIdentifier = "SelectTagCell"
 
@@ -19,16 +19,14 @@ class ChooseTagsTableViewController: UITableViewController , SelectTagCellProtoc
         super.viewDidLoad()
         setup()
         setupNav()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
     }
 
     // MARK: - Table view data source
@@ -49,6 +47,7 @@ class ChooseTagsTableViewController: UITableViewController , SelectTagCellProtoc
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: SelectTagTableViewCell = tableView.dequeueReusableCell(withIdentifier: selectTagCellIdentifier, for: indexPath) as! SelectTagTableViewCell
+        cell.delegate = self
         cell.setText(text: tagList[indexPath.row])
         cell.selectionStyle = .none
         return cell
@@ -62,17 +61,6 @@ class ChooseTagsTableViewController: UITableViewController , SelectTagCellProtoc
         titleL.font = UIFont.systemFont(ofSize: 18)
         titleL.text = "Choose Tags"
         tableView.tableHeaderView = titleL
-        fillTags()
-    }
-
-    func fillTags(){
-        tagList.insert("Sport Gears", at: 0)
-        tagList.insert("Clothing", at: 0)
-        tagList.insert("Jobs / Occupations", at: 0)
-        tagList.insert("Furniture", at: 0)
-        tagList.insert("Electronics", at: 0)
-        tagList.insert("Entertainment", at: 0)
-        tagList.insert("Textbook", at: 0)
     }
     
     func select(tag: String, isActive: Bool) {
@@ -81,10 +69,11 @@ class ChooseTagsTableViewController: UITableViewController , SelectTagCellProtoc
         }else{
             removeTag(tag: tag)
         }
+        print("selected Tags: \(selectedTagList)")
     }
     
     func removeTag(tag:String){
-        for i in 1...selectedTagList.count{
+        for i in 0...selectedTagList.count-1{
             if selectedTagList[i] == tag {
                 selectedTagList.remove(at: i)
                 return
@@ -99,6 +88,7 @@ class ChooseTagsTableViewController: UITableViewController , SelectTagCellProtoc
     }
     
     func dismissCurrent(){
+        parentC?.fillTags(tags: selectedTagList)
         self.navigationController?.popViewController(animated: true)
     }
 

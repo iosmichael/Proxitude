@@ -38,7 +38,12 @@ class ItemTableViewCell: UITableViewCell {
         print(item.name)
         self.itemTitle.text = item.name
         self.itemPrice.text = item.price
-        downloadImage(imageURL: item.thumbnail!)
+        self.itemDate.text = item.date
+        if item.thumbnail == nil{
+            self.thumbnail.image = UIImage.init(named: "test-item")
+        }else{
+            downloadImage(imageURL: item.thumbnail!)
+        }
     }
     
     func downloadImage(imageURL:String){
@@ -105,6 +110,7 @@ class SelectTagTableViewCell: UITableViewCell {
         tagBtn.layer.borderColor = inactiveColor.cgColor
         tagBtn.setTitleColor(inactiveColor, for: .normal)
         tagBtn.addTarget(self, action: #selector(click), for: .touchUpInside)
+        isActive = false
         contentView.addSubview(tagBtn)
     }
     
