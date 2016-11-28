@@ -99,8 +99,14 @@ class ProfileTableViewController: UITableViewController {
                 navigationController?.pushViewController(categoryController, animated: true)
                 break
             case 1:
+                //About
+                let url = URL.init(string: "https://www.facebook.com/proximarketplace/")
+                UIApplication.shared.openURL(url!)
                 break
             case 2:
+                //Report a Problem
+                let url = URL.init(string: "https://twitter.com/proxiwheaton")
+                UIApplication.shared.openURL(url!)
                 break
             default:
                 break
@@ -116,7 +122,7 @@ class ProfileTableViewController: UITableViewController {
     
     func fillData(){
 //        list.insert((UIImage.init(named: "login")!,"Test-Login-Page"), at: 0)
-        list.insert((UIImage.init(named: "report")!,"Report a Problem"), at: 0)
+        list.insert((UIImage.init(named: "report")!,"Report a Problem :P"), at: 0)
         list.insert((UIImage.init(named: "facebook")!,"About"), at: 0)
 //        list.insert((UIImage.init(named: "message")!,"Messages"), at: 0)
 //        list.insert((UIImage.init(named: "scanner")!,"QR Scanner"), at: 0)

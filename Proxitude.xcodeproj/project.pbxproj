@@ -49,6 +49,8 @@
 		9EB0DB441DEC4FBD0004EDE3 /* LoginTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EB0DB431DEC4FBD0004EDE3 /* LoginTableViewCell.xib */; };
 		9EB0DB481DEC50140004EDE3 /* images.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB0DB471DEC50140004EDE3 /* images.jpg */; };
 		9EB0DB4C1DEC5F2E0004EDE3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EB0DB4B1DEC5F2E0004EDE3 /* MessageUI.framework */; };
+		9EB0DB4F1DEC6A090004EDE3 /* introPage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EB0DB4D1DEC6A090004EDE3 /* introPage.png */; };
+		9EB0DB501DEC6A090004EDE3 /* proxi white.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EB0DB4E1DEC6A090004EDE3 /* proxi white.png */; };
 		9EEDD3F51DE93106007D7D58 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEDD3F41DE93106007D7D58 /* Item.swift */; };
 		9EEDD3F71DE93187007D7D58 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EEDD3F61DE93187007D7D58 /* GoogleService-Info.plist */; };
 		D36C4FAD2B6773CA3D9606A3 /* Pods_ProxitudeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2A57A340003F250F1EF544 /* Pods_ProxitudeTests.framework */; };
@@ -121,6 +123,8 @@
 		9EB0DB471DEC50140004EDE3 /* images.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = images.jpg; sourceTree = "<group>"; };
 		9EB0DB491DEC5EFF0004EDE3 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
 		9EB0DB4B1DEC5F2E0004EDE3 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		9EB0DB4D1DEC6A090004EDE3 /* introPage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = introPage.png; sourceTree = "<group>"; };
+		9EB0DB4E1DEC6A090004EDE3 /* proxi white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "proxi white.png"; sourceTree = "<group>"; };
 		9EEDD3F41DE93106007D7D58 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		9EEDD3F61DE93187007D7D58 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9EEDD4031DE936C1007D7D58 /* Proxitude-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Proxitude-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -212,7 +216,6 @@
 				9E51306B1DE8CF4F0014140B /* ContactTableViewCell.xib */,
 				9E486C7E1DE8DEE1003CDBBE /* ProfileTableViewCell.xib */,
 				9EB0DB431DEC4FBD0004EDE3 /* LoginTableViewCell.xib */,
-				9EB0DB471DEC50140004EDE3 /* images.jpg */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -230,6 +233,9 @@
 		9E5130691DE8CEF80014140B /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				9EB0DB4D1DEC6A090004EDE3 /* introPage.png */,
+				9EB0DB4E1DEC6A090004EDE3 /* proxi white.png */,
+				9EB0DB471DEC50140004EDE3 /* images.jpg */,
 				9E5130491DE8CBD60014140B /* icons.xcassets */,
 				9E5130461DE8CBCF0014140B /* cell.xcassets */,
 				9E59FC7C1DE4FD67000DF062 /* Assets.xcassets */,
@@ -435,6 +441,8 @@
 				9E5130601DE8CBD70014140B /* LogInViewController.xib in Resources */,
 				9E59FC801DE4FD67000DF062 /* LaunchScreen.storyboard in Resources */,
 				9E5130471DE8CBCF0014140B /* cell.xcassets in Resources */,
+				9EB0DB4F1DEC6A090004EDE3 /* introPage.png in Resources */,
+				9EB0DB501DEC6A090004EDE3 /* proxi white.png in Resources */,
 				9E51305A1DE8CBD70014140B /* Info.plist in Resources */,
 				9EEDD3F71DE93187007D7D58 /* GoogleService-Info.plist in Resources */,
 				9E59FC7D1DE4FD67000DF062 /* Assets.xcassets in Resources */,

@@ -24,6 +24,7 @@ class Query: NSObject {
         return (itemRef?.queryLimited(toLast: UInt(limit)).queryOrdered(byChild: "sell").queryEqual(toValue: sell))!
     }
     
+    //
     func queryByCategory(limit:Int,category:String)->FIRDatabaseQuery{
         return (itemRef?.queryOrdered(byChild: "tags/\(category)").queryEqual(toValue: "1").queryLimited(toLast: UInt(limit)))!
     }
@@ -32,6 +33,7 @@ class Query: NSObject {
         return (itemRef?.queryOrdered(byChild: "user").queryEqual(toValue: user))!
     }
     
+    //
     func queryBySearchStr(limit:Int, query:String)->FIRDatabaseQuery{
         return (itemRef?.queryLimited(toLast: UInt(limit)).queryOrdered(byChild: "title").queryStarting(atValue: query))!
     }

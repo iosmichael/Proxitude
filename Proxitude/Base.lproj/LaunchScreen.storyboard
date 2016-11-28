@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,12 +20,36 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="introPage.png" translatesAutoresizingMaskIntoConstraints="NO" id="ctJ-Lc-av1">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="proxi white.png" translatesAutoresizingMaskIntoConstraints="NO" id="R5K-rj-qN5">
+                                <rect key="frame" x="112.5" y="258.5" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="Jd8-50-RDd"/>
+                                    <constraint firstAttribute="width" constant="150" id="hMq-qu-VcM"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ctJ-Lc-av1" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="40n-23-rTE"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="ctJ-Lc-av1" secondAttribute="bottom" id="WRn-RH-ja1"/>
+                            <constraint firstAttribute="trailing" secondItem="ctJ-Lc-av1" secondAttribute="trailing" id="YYW-10-Zzp"/>
+                            <constraint firstItem="R5K-rj-qN5" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="mqd-JR-Y8H"/>
+                            <constraint firstItem="R5K-rj-qN5" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="onI-17-cdA"/>
+                            <constraint firstItem="ctJ-Lc-av1" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="ztF-Wl-jid"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="introPage.png" width="1125" height="2001"/>
+        <image name="proxi white.png" width="444" height="438"/>
+    </resources>
 </document>
