@@ -199,7 +199,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Zr7-hm-9b5" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Search" image="search" selectedImage="search-active" id="06i-H2-bIe"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3M9-6O-Lxm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3M9-6O-Lxm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -218,7 +218,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kbu-vN-n63" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Me" image="person" selectedImage="person-active" id="aRb-vc-X1R"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CEd-qn-nj7">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="CEd-qn-nj7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -237,7 +237,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WXP-Pu-n4P" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Save" image="save" selectedImage="save-active" id="xFL-EK-xm0"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mQt-6S-i7t">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="mQt-6S-i7t">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -275,7 +275,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="q64-ir-8iO" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="home" selectedImage="home-active" id="HnF-ju-7IO"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hOQ-Ao-fXZ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="hOQ-Ao-fXZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

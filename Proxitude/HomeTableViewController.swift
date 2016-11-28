@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class HomeTableViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
     
@@ -128,6 +129,12 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, UISea
     }
     
     func presentPost(){
+        var logged = FIRAuth.auth()?.currentUser
+        if logged == nil {
+            let loginViewController = LogInViewController.init(nibName: "LogInViewController", bundle: nil)
+            present(loginViewController, animated: true, completion: nil)
+            return
+        }
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         let postViewController:PostItemViewController = storyboard.instantiateViewController(withIdentifier: "post") as! PostItemViewController
         postViewController.request = true
@@ -163,5 +170,6 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, UISea
             resultController.tableView.reloadData()
         })
     }
+
     
 }

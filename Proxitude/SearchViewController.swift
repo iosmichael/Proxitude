@@ -119,7 +119,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         searchBar?.setTextFieldBackgroundColor(color: UIColor.init(hex: "464646"))
     }
     
-    
     func addPostBtn(){
         let navRightBtn = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(presentPost))
         navigationItem.rightBarButtonItem = navRightBtn

@@ -47,16 +47,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         let authentication = user.authentication
         let credential = FIRGoogleAuthProvider.credential(withIDToken: (authentication?.idToken)!,
                                                           accessToken: (authentication?.accessToken)!)
+        
         FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
             if let error = error {
                 print(error.localizedDescription)
                 return
             }
+            
             print("email: \(user?.email) ID: \(user?.uid) Name: \(user?.displayName)")
         })
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        let current = FIRAuth.auth()
+        do{
+            try current?.signOut()
+        }catch{
+            
+        }
         print(error.localizedDescription)
     }
     

@@ -62,7 +62,7 @@ class Item: NSObject {
         if sell{
             for i in 0...images.count-1{
                 //let data = UIImageJPEGRepresentation(images[i], 0.8)
-                let data = UIImageJPEGRepresentation(UIImage.init(named: "pic")!, 0.8)
+                let data = UIImageJPEGRepresentation(images[i], 0.8)
                 let picRef = storageRef?.child("images/\(autoId)-image-\(i).jpg")
                 let metaData = FIRStorageMetadata()
                 metaData.contentType = "image/jpg"

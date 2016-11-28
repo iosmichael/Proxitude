@@ -19,6 +19,9 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate {
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func close(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
