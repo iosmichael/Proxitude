@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import Firebase
 
 class ProfileTableViewController: UITableViewController {
 
     let tagCellIdentifier = "tagCell"
     let contactCellIdentifier = "contactCell"
+    let loginIdentifier = "loginCell"
     let tagCellHeight: CGFloat = 37
     let contactCellHeight: CGFloat = 70
+    var isLogged:Bool?
     var list = [(UIImage,String)]()
     
     override func viewDidLoad() {
@@ -22,16 +25,14 @@ class ProfileTableViewController: UITableViewController {
         addPostBtn()
         setup()
         fillData()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        let user = FIRAuth.auth()?.currentUser
+        isLogged = user != nil
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let user = FIRAuth.auth()?.currentUser
+        isLogged = user != nil
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -54,9 +55,22 @@ class ProfileTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: contactCellIdentifier, for: indexPath)
-            cell.selectionStyle = .none
-            return cell
+            if isLogged!{
+                let cell:ProfileTableViewCell = tableView.dequeueReusableCell(withIdentifier: contactCellIdentifier, for: indexPath) as! ProfileTableViewCell
+                if let user = FIRAuth.auth()?.currentUser {
+                    for profile in user.providerData {
+                        let name = profile.displayName
+                        let email = profile.email
+                        cell.setupCell(username: (name)!, email: (email)!)
+                    }
+                }
+                cell.selectionStyle = .none
+                return cell
+            }else{
+                let cell = tableView.dequeueReusableCell(withIdentifier: loginIdentifier, for: indexPath)
+                cell.selectionStyle = .none
+                return cell
+            }
         }else{
             let cell:TagTableViewCell = tableView.dequeueReusableCell(withIdentifier: tagCellIdentifier, for: indexPath) as! TagTableViewCell
             cell.accessoryType = .disclosureIndicator
@@ -65,18 +79,47 @@ class ProfileTableViewController: UITableViewController {
             return cell
         }
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0{
+            if isLogged!{
+                signOut()
+                isLogged = false
+                tableView.reloadData()
+            }else{
+                let loginViewController = LogInViewController.init(nibName: "LogInViewController", bundle: nil)
+                present(loginViewController, animated: true, completion: nil)
+            }
+        }else{
+            switch indexPath.row {
+            case 0:
+                //myItems
+                let categoryController = CategoryTableViewController()
+                categoryController.queryType = .myItem
+                navigationController?.pushViewController(categoryController, animated: true)
+                break
+            case 1:
+                break
+            case 2:
+                break
+            default:
+                break
+            }
+        }
+    }
 
     func setup(){
         tableView.register(UINib.init(nibName: "TagTableViewCell", bundle: nil), forCellReuseIdentifier: tagCellIdentifier)
         tableView.register(UINib.init(nibName: "ProfileTableViewCell", bundle: nil), forCellReuseIdentifier: contactCellIdentifier)
+        tableView.register(UINib.init(nibName: "LoginTableViewCell", bundle: nil), forCellReuseIdentifier: loginIdentifier)
     }
     
     func fillData(){
-        list.insert((UIImage.init(named: "login")!,"Test-Login-Page"), at: 0)
+//        list.insert((UIImage.init(named: "login")!,"Test-Login-Page"), at: 0)
         list.insert((UIImage.init(named: "report")!,"Report a Problem"), at: 0)
         list.insert((UIImage.init(named: "facebook")!,"About"), at: 0)
-        list.insert((UIImage.init(named: "message")!,"Messages"), at: 0)
-        list.insert((UIImage.init(named: "scanner")!,"QR Scanner"), at: 0)
+//        list.insert((UIImage.init(named: "message")!,"Messages"), at: 0)
+//        list.insert((UIImage.init(named: "scanner")!,"QR Scanner"), at: 0)
         list.insert((UIImage.init(named: "myItem")!,"My Items"), at: 0)
     }
     
@@ -87,10 +130,20 @@ class ProfileTableViewController: UITableViewController {
     }
     
     func presentPost(){
+        let logged = FIRAuth.auth()?.currentUser
+        if logged == nil {
+            let loginViewController = LogInViewController.init(nibName: "LogInViewController", bundle: nil)
+            present(loginViewController, animated: true, completion: nil)
+            return
+        }
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         let postViewController = storyboard.instantiateViewController(withIdentifier: "post")
         navigationController?.pushViewController(postViewController, animated: true)
     }
 
+    func signOut(){
+        try! FIRAuth.auth()!.signOut()
+        GIDSignIn.sharedInstance().signOut()
+    }
    
 }

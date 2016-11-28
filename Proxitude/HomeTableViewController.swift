@@ -100,6 +100,8 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, UISea
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0{
             let categoryController = CategoryTableViewController()
+            categoryController.queryType = .category
+            categoryController.category = tagList[indexPath.row].1
             navigationController?.pushViewController(categoryController, animated: true)
         }else{
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
@@ -116,7 +118,7 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, UISea
 
     func fillData(){
         let query = Query()
-        query.queryRecommended(limit: 20).observe(.value, with: { snapshot in
+        query.queryNew(limit: 20,sell:true).observe(.value, with: { snapshot in
             self.list = query.getItems(snapshot: snapshot)
             self.tableView.reloadData()
         })
@@ -129,7 +131,7 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, UISea
     }
     
     func presentPost(){
-        var logged = FIRAuth.auth()?.currentUser
+        let logged = FIRAuth.auth()?.currentUser
         if logged == nil {
             let loginViewController = LogInViewController.init(nibName: "LogInViewController", bundle: nil)
             present(loginViewController, animated: true, completion: nil)

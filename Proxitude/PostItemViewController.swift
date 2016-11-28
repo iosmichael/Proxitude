@@ -187,8 +187,8 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
             print(valid)
             let item = Item()
             images.removeLast()
-            item.postData(type:request, name: (itemTitle?.text)!, price: (price?.text)!, detail: detail, tags: tags, images: images, fields: fields, user: "michaelliu@mywheatonedu")
-            print("item fields: \(fields)")
+            
+            item.postData(type:request, name: (itemTitle?.text)!, price: (price?.text)!, detail: detail, tags: tags, images: images, fields: fields)
             navigationController?.popViewController(animated: true)
         }else{
             print("didnt pass")
@@ -197,7 +197,7 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     func submitValidator() -> Bool{
         var messages = [String]()
-        if !request {
+        if request {
             if (images.count == 1){
                 messages.insert("At least one image is required", at: messages.count)
             }
@@ -205,16 +205,18 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
         if (itemTitle?.text?.isEmpty)!{
             messages.insert("Title cannot be empty", at: messages.count)
         }
-        if !request{
+        if request{
             if (price?.text?.isEmpty)!{
                 messages.insert("Price cannot be empty", at: messages.count)
             }
         }
         if (detail.isEmpty){
-            messages.insert("Detail field cannot be empty", at: messages.count)
+           messages.insert("Detail field cannot be empty", at: messages.count)
         }
-        if (tags.count == 0){
-            messages.insert("At least one tag is required", at: messages.count)
+        if request{
+            if (tags.count == 0){
+                messages.insert("At least one tag is required", at: messages.count)
+            }
         }
         print(messages)
         return messages.count == 0
@@ -244,10 +246,9 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
         if !request {
             list = [(cellType.LI,"Title","Item Title"),
                     (cellType.LL,"Detail","(Required)"),
-                    (cellType.LL,"Tags","(Required)"),
                     (cellType.CII,"Field","Value")]
             self.detailControllerIndex = 1
-            self.tagSelectorIndex = 2
+            self.tagSelectorIndex = -1
         }
     }
     

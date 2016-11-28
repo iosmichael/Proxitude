@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="rKj-XV-9nI">
-                        <rect key="frame" x="15" y="13" width="45" height="45"/>
+                        <rect key="frame" x="15" y="12" width="45" height="45"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="45" id="4YJ-83-dHn"/>
                             <constraint firstAttribute="width" constant="45" id="izf-zi-KoO"/>
@@ -42,10 +42,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leave" translatesAutoresizingMaskIntoConstraints="NO" id="vbg-6m-WyN">
-                        <rect key="frame" x="285" y="21.5" width="20" height="26.5"/>
+                        <rect key="frame" x="293" y="28" width="12" height="15"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="26.710000000000001" id="0UW-3K-8Z9"/>
-                            <constraint firstAttribute="width" constant="20" id="QH5-cx-npH"/>
+                            <constraint firstAttribute="height" constant="15" id="0UW-3K-8Z9"/>
+                            <constraint firstAttribute="width" constant="12" id="QH5-cx-npH"/>
                         </constraints>
                     </imageView>
                 </subviews>

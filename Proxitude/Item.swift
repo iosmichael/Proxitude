@@ -11,7 +11,6 @@ import Firebase
 
 class Item: NSObject {
     let storageURL = "gs://dazzling-fire-5565.appspot.com"
-    let username = "michaelliu@mywheatonedu"
     
     var itemId:String!
     var name:String!
@@ -20,6 +19,7 @@ class Item: NSObject {
     var date: String!
     var thumbnail:String!
     var user:String!
+    var uid:String!
     var imagesURL = [String]()
     var sell = true
     
@@ -30,16 +30,21 @@ class Item: NSObject {
     var ref: FIRDatabaseReference? = FIRDatabase.database().reference().child("wheaton-college")
     var storageRef: FIRStorageReference?
     
-    func postData(type:Bool, name:String,price:String,detail:String,tags:[String],images:[UIImage],fields:[(String,String)],user:String){
+    func postData(type:Bool, name:String,price:String,detail:String,tags:[String],images:[UIImage],fields:[(String,String)]){
         self.name = name
         self.price = price
         self.detail = detail
         self.fields = fields
         self.tags = tags
+        self.sell = type
         self.images = images
-        self.user = user
-        self.sell = true
-        writeItem()
+        if let user = FIRAuth.auth()?.currentUser {
+            for profile in user.providerData {
+                self.user = profile.email
+                self.uid = profile.uid
+            }
+        }
+        writeItem(user: self.user)
     }
     
     func readData(itemId:String){
@@ -47,10 +52,10 @@ class Item: NSObject {
         print("\(dataNode)")
     }
     
-    func writeItem(){
+    func writeItem(user:String){
         storageRef = FIRStorage.storage().reference(forURL: storageURL)
         let itemsNode = ref?.child("items").childByAutoId()
-        let usersNode = ref?.child("users").child(username).child("items").childByAutoId()
+        let usersNode = ref?.child("users").child(uid).child("items").childByAutoId()
         
         FIRAuth.auth()?.signInAnonymously() { (user, error) in
             if let error = error {
@@ -83,7 +88,7 @@ class Item: NSObject {
         //#warning - Need dates! here!
         let currentDate: Date = Date()
         let dateString: String = currentDate.convertDateToString()
-        var posts = ["name":name!, "price":price!, "detail":detail!, "user":username, "date":dateString, "sell":sell] as [String : Any]
+        var posts = ["name":name!, "price":price!, "detail":detail!, "user":user, "date":dateString, "sell":sell] as [String : Any]
         for (field, input) in fields{
             posts[field] = input
             print("\(field):\(input)")
@@ -96,8 +101,13 @@ class Item: NSObject {
         }
     }
     
-    func save(itemID:String){
-        ref?.child("users").child(username).child("saves").childByAutoId().setValue(itemID)
+    func save(itemID:String,user:String){
+        ref?.child("users").child(user).child("saves").childByAutoId().setValue(itemID)
+    }
+    
+    func deleteItem(itemID:String){
+        let itemsNode = ref?.child("items").child(itemID)
+        itemsNode?.removeValue()
     }
     
     

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SaveTableViewController: UITableViewController {
 
@@ -79,6 +80,12 @@ class SaveTableViewController: UITableViewController {
     }
     
     func presentPost(){
+        let logged = FIRAuth.auth()?.currentUser
+        if logged == nil {
+            let loginViewController = LogInViewController.init(nibName: "LogInViewController", bundle: nil)
+            present(loginViewController, animated: true, completion: nil)
+            return
+        }
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         let postViewController = storyboard.instantiateViewController(withIdentifier: "post")
         navigationController?.pushViewController(postViewController, animated: true)

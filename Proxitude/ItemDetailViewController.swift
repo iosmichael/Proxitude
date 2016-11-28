@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MessageUI
 
-class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UICollectionViewDataSource,UICollectionViewDelegate{
+class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UICollectionViewDataSource,UICollectionViewDelegate,MFMailComposeViewControllerDelegate{
 
     var item:Item?
     
@@ -59,6 +60,9 @@ class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableView
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
+            if images.count == 0 {
+                return 0
+            }
             return imageCollectionCellHeight
         case 1:
             return CustomTableViewCell.dynamicHeight(label: list[indexPath.row].1, input: list[indexPath.row].2)
@@ -155,7 +159,10 @@ class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableView
     }
     
     func presentImagePicker(indexPath:IndexPath){
-        
+        let presentImageC = ImagePresenterViewController()
+        presentImageC.images = images
+        presentImageC.currentPage = indexPath.item
+        present(presentImageC, animated: true, completion: nil)
     }
 
     func setupNav(){
@@ -175,7 +182,7 @@ class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableView
     }
     
     func email(){
-        
+        sendEmail()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -195,6 +202,22 @@ class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableView
         for (field,input) in (item?.fields)! {
             list.insert((cellType.SVLL,field,input), at: list.count)
         }
+    }
+    
+    func sendEmail() {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients([(item?.user)!])
+            mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
+            present(mail, animated: true)
+        } else {
+            // show failure alert
+        }
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
     }
     
     /*

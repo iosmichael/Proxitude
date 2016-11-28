@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
     
@@ -30,53 +31,56 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         navigationController?.masterNav()
         navigationController?.extendedLayoutIncludesOpaqueBars = true
         addPostBtn()
+        fillData()
         // Do any additional setup after loading the view.
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? tagList.count : items.count
+        return items.count
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section == 0 ? CGFloat(tagHeight) : CGFloat(itemHeight)
+        return CGFloat(itemHeight)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "" : "What's New"
+        return "What's New"
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0{
-            let cell:TagTableViewCell = tableView.dequeueReusableCell(withIdentifier: tagIdentifier, for: indexPath) as! TagTableViewCell
-            let (tagImage, tagName) = tagList[indexPath.row]
-            cell.setIconTag(icon: UIImage.init(named: tagImage)!, tag: tagName)
-            cell.accessoryType = .disclosureIndicator
-            cell.selectionStyle = .none
-            return cell
-        }else{
+//        if indexPath.section == 0{
+//            let cell:TagTableViewCell = tableView.dequeueReusableCell(withIdentifier: tagIdentifier, for: indexPath) as! TagTableViewCell
+//            let (tagImage, tagName) = tagList[indexPath.row]
+//            cell.setIconTag(icon: UIImage.init(named: tagImage)!, tag: tagName)
+//            cell.accessoryType = .disclosureIndicator
+//            cell.selectionStyle = .none
+//            return cell
+//        }else{
             let cell:ItemTableViewCell = tableView.dequeueReusableCell(withIdentifier: itemIdentifier, for: indexPath) as! ItemTableViewCell
             let item = items[indexPath.row]
             cell.setItem(item: item)
             cell.accessoryType = .disclosureIndicator
             cell.selectionStyle = .none
             return cell
-        }
+//        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0{
-            let categoryController = CategoryTableViewController()
-            navigationController?.pushViewController(categoryController, animated: true)
-        }else{
+//        if indexPath.section == 0{
+//            let categoryController = CategoryTableViewController()
+//            categoryController.queryType = .category
+//            categoryController.category = tagList[indexPath.row].1
+//            navigationController?.pushViewController(categoryController, animated: true)
+//        }else{
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
             let itemDetailController:ItemDetailViewController = storyboard.instantiateViewController(withIdentifier: "itemDetail") as! ItemDetailViewController
             itemDetailController.item = items[indexPath.row]
             navigationController?.pushViewController(itemDetailController, animated: true)
-        }
+//        }
     }
 
     
@@ -98,7 +102,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .singleLine
-        tableView.register(UINib.init(nibName: "TagTableViewCell", bundle: nil), forCellReuseIdentifier: tagIdentifier)
+//        tableView.register(UINib.init(nibName: "TagTableViewCell", bundle: nil), forCellReuseIdentifier: tagIdentifier)
         tableView.register(UINib.init(nibName: "ItemTableViewCell", bundle: nil), forCellReuseIdentifier: itemIdentifier)
         searchController = UISearchController.init(searchResultsController: SearchResultTableViewController())
         searchController?.searchResultsUpdater = self
@@ -126,12 +130,26 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func presentPost(){
+        let logged = FIRAuth.auth()?.currentUser
+        if logged == nil {
+            let loginViewController = LogInViewController.init(nibName: "LogInViewController", bundle: nil)
+            present(loginViewController, animated: true, completion: nil)
+            return
+        }
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
         let postViewController:PostItemViewController = storyboard.instantiateViewController(withIdentifier: "post") as! PostItemViewController
         postViewController.request = false
         navigationController?.pushViewController(postViewController, animated: true)
     }
 
+    func fillData(){
+        let query = Query()
+        query.queryNew(limit: 20,sell:false).observe(.value, with: { snapshot in
+            self.items = query.getItems(snapshot: snapshot)
+            self.tableView.reloadData()
+        })
+    }
+    
     func queryGetItems(searchStr:String){
         let query = Query()
         query.queryBySearchStr(limit: 20, query: searchStr).observe(.value, with: { snapshot in

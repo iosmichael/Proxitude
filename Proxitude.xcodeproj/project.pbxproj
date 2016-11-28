@@ -44,6 +44,11 @@
 		9E69B4AB1DE9671700AAAC0C /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E69B4AA1DE9671700AAAC0C /* Query.swift */; };
 		9E69B4AD1DE9755D00AAAC0C /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E69B4AC1DE9755D00AAAC0C /* Contact.swift */; };
 		9EB0DB3E1DEC01780004EDE3 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB0DB3D1DEC01780004EDE3 /* CategoryTableViewController.swift */; };
+		9EB0DB401DEC4A970004EDE3 /* ImagePresenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB0DB3F1DEC4A970004EDE3 /* ImagePresenterViewController.swift */; };
+		9EB0DB421DEC4FAA0004EDE3 /* LoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB0DB411DEC4FAA0004EDE3 /* LoginTableViewCell.swift */; };
+		9EB0DB441DEC4FBD0004EDE3 /* LoginTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EB0DB431DEC4FBD0004EDE3 /* LoginTableViewCell.xib */; };
+		9EB0DB481DEC50140004EDE3 /* images.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9EB0DB471DEC50140004EDE3 /* images.jpg */; };
+		9EB0DB4C1DEC5F2E0004EDE3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EB0DB4B1DEC5F2E0004EDE3 /* MessageUI.framework */; };
 		9EEDD3F51DE93106007D7D58 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEDD3F41DE93106007D7D58 /* Item.swift */; };
 		9EEDD3F71DE93187007D7D58 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9EEDD3F61DE93187007D7D58 /* GoogleService-Info.plist */; };
 		D36C4FAD2B6773CA3D9606A3 /* Pods_ProxitudeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B2A57A340003F250F1EF544 /* Pods_ProxitudeTests.framework */; };
@@ -110,6 +115,12 @@
 		9E69B4AA1DE9671700AAAC0C /* Query.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		9E69B4AC1DE9755D00AAAC0C /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		9EB0DB3D1DEC01780004EDE3 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
+		9EB0DB3F1DEC4A970004EDE3 /* ImagePresenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePresenterViewController.swift; sourceTree = "<group>"; };
+		9EB0DB411DEC4FAA0004EDE3 /* LoginTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTableViewCell.swift; sourceTree = "<group>"; };
+		9EB0DB431DEC4FBD0004EDE3 /* LoginTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginTableViewCell.xib; sourceTree = "<group>"; };
+		9EB0DB471DEC50140004EDE3 /* images.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = images.jpg; sourceTree = "<group>"; };
+		9EB0DB491DEC5EFF0004EDE3 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
+		9EB0DB4B1DEC5F2E0004EDE3 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		9EEDD3F41DE93106007D7D58 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		9EEDD3F61DE93187007D7D58 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9EEDD4031DE936C1007D7D58 /* Proxitude-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Proxitude-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -127,6 +138,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EB0DB4C1DEC5F2E0004EDE3 /* MessageUI.framework in Frameworks */,
 				9E0CD00F1DE91C6D000C1FF9 /* AVFoundation.framework in Frameworks */,
 				911D1A126DCF35EF7D71F276 /* Pods_Proxitude.framework in Frameworks */,
 			);
@@ -180,6 +192,7 @@
 				9E5130501DE8CBD60014140B /* LogInViewController.swift */,
 				9E0CD00C1DE91C40000C1FF9 /* QRCodeViewController.swift */,
 				9E5130511DE8CBD60014140B /* LogInViewController.xib */,
+				9EB0DB3F1DEC4A970004EDE3 /* ImagePresenterViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -193,10 +206,13 @@
 				9E51304E1DE8CBD60014140B /* ItemTableViewCell.swift */,
 				9E51306A1DE8CF4F0014140B /* ContactTableViewCell.swift */,
 				9E486C7D1DE8DEE1003CDBBE /* ProfileTableViewCell.swift */,
+				9EB0DB411DEC4FAA0004EDE3 /* LoginTableViewCell.swift */,
 				9E51304F1DE8CBD60014140B /* ItemTableViewCell.xib */,
 				9E5130561DE8CBD70014140B /* TagTableViewCell.xib */,
 				9E51306B1DE8CF4F0014140B /* ContactTableViewCell.xib */,
 				9E486C7E1DE8DEE1003CDBBE /* ProfileTableViewCell.xib */,
+				9EB0DB431DEC4FBD0004EDE3 /* LoginTableViewCell.xib */,
+				9EB0DB471DEC50140004EDE3 /* images.jpg */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -282,6 +298,8 @@
 		C895929399F29F06C64FA041 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9EB0DB4B1DEC5F2E0004EDE3 /* MessageUI.framework */,
+				9EB0DB491DEC5EFF0004EDE3 /* Messages.framework */,
 				9E0CD00E1DE91C6D000C1FF9 /* AVFoundation.framework */,
 				ACB1D54171A8AB5CEC30786F /* Pods_Proxitude.framework */,
 				9B2A57A340003F250F1EF544 /* Pods_ProxitudeTests.framework */,
@@ -423,6 +441,8 @@
 				9E59FC7B1DE4FD66000DF062 /* Main.storyboard in Resources */,
 				9E51305E1DE8CBD70014140B /* ItemTableViewCell.xib in Resources */,
 				9E51306D1DE8CF4F0014140B /* ContactTableViewCell.xib in Resources */,
+				9EB0DB481DEC50140004EDE3 /* images.jpg in Resources */,
+				9EB0DB441DEC4FBD0004EDE3 /* LoginTableViewCell.xib in Resources */,
 				9E486C801DE8DEE1003CDBBE /* ProfileTableViewCell.xib in Resources */,
 				9E5130581DE8CBD70014140B /* icons.xcassets in Resources */,
 			);
@@ -593,6 +613,7 @@
 				9E5130641DE8CBD70014140B /* SearchViewController.swift in Sources */,
 				9E0CD00D1DE91C40000C1FF9 /* QRCodeViewController.swift in Sources */,
 				9E51306C1DE8CF4F0014140B /* ContactTableViewCell.swift in Sources */,
+				9EB0DB401DEC4A970004EDE3 /* ImagePresenterViewController.swift in Sources */,
 				9E69B4AD1DE9755D00AAAC0C /* Contact.swift in Sources */,
 				9E5130611DE8CBD70014140B /* MasterViewController.swift in Sources */,
 				9E486C841DE8E409003CDBBE /* HomePageSlideView.swift in Sources */,
@@ -609,6 +630,7 @@
 				9E486C7F1DE8DEE1003CDBBE /* ProfileTableViewCell.swift in Sources */,
 				9E51305D1DE8CBD70014140B /* ItemTableViewCell.swift in Sources */,
 				9E59FC741DE4FD66000DF062 /* AppDelegate.swift in Sources */,
+				9EB0DB421DEC4FAA0004EDE3 /* LoginTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

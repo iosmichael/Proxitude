@@ -12,37 +12,31 @@ class HomePageSlideView: UIView, UIScrollViewDelegate {
 
     var scrollView: UIScrollView?
     var pageIndex: UIPageControl?
-    let pageNum: Int = 5
-    let timeInterval = 8.0
     
     var images = [UIImage]()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        fillImages()
-        setupScrollView(images: images)
-        setupPageIndex()
-        addSubview(scrollView!)
-        addSubview(pageIndex!)
-        pageIndex?.numberOfPages = pageNum
-        Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(changePage), userInfo: nil, repeats: true)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupPageIndex(){
+    func setupPageIndex(currentPage: Int){
         pageIndex = UIPageControl.init(frame: CGRect.init(x: 0, y: (scrollView?.frame.size.height)!*0.8, width: (scrollView?.frame.size.width)!/2, height: 20))
         pageIndex?.tintColor = UIColor.gray
         pageIndex?.currentPageIndicatorTintColor = UIColor.white
         pageIndex?.currentPage = 0
+        addSubview(scrollView!)
+        addSubview(pageIndex!)
+        pageIndex?.numberOfPages = images.count
     }
     
-    func setupScrollView(images: [UIImage]){
+    func setupScrollView(images: [UIImage], currentPage: Int){
         scrollView = UIScrollView.init(frame: frame)
-        scrollView?.contentSize = CGSize.init(width: frame.size.width * CGFloat(pageNum), height: 0)
-        for i:Int in 0...pageNum{
+        scrollView?.contentSize = CGSize.init(width: frame.size.width * CGFloat(images.count), height: 0)
+        for i:Int in 0...images.count-1{
             var image: UIImage?
             if i > images.count - 1 {
                 image = UIImage.init(named: "banner")
@@ -59,11 +53,12 @@ class HomePageSlideView: UIView, UIScrollViewDelegate {
         self.scrollView?.showsVerticalScrollIndicator = false
         scrollView?.bounces = false
         scrollView?.delegate = self;
+        setupPageIndex(currentPage: currentPage)
     }
     
     func changePage(){
         let pageWidth = scrollView?.frame.size.width
-        if pageIndex?.currentPage ==  pageNum - 1 {
+        if pageIndex?.currentPage ==  images.count - 1 {
             pageIndex?.currentPage = 0
             scrollView?.setContentOffset(CGPoint.zero, animated: true)
         }else{
@@ -77,10 +72,6 @@ class HomePageSlideView: UIView, UIScrollViewDelegate {
         let pageWidth = scrollView.frame.size.width
         let page: Int = Int(floor((scrollView.contentOffset.x-pageWidth/2)/pageWidth))+1
         pageIndex?.currentPage = page
-    }
-    
-    func fillImages(){
-        
     }
     
     

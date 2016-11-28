@@ -20,21 +20,23 @@ class Query: NSObject {
         userRef = FIRDatabase.database().reference().child("wheaton-college/users")
     }
     
-    func queryRecommended(limit:Int)->FIRDatabaseQuery{
-        return (itemRef?.queryLimited(toLast: UInt(limit)))!
+    func queryNew(limit:Int,sell:Bool)->FIRDatabaseQuery{
+        return (itemRef?.queryLimited(toLast: UInt(limit)).queryOrdered(byChild: "sell").queryEqual(toValue: sell))!
     }
     
     func queryByCategory(limit:Int,category:String)->FIRDatabaseQuery{
         return (itemRef?.queryOrdered(byChild: "tags/\(category)").queryEqual(toValue: "1").queryLimited(toLast: UInt(limit)))!
     }
     
-    func queryItemByUser(limit:Int, user:String)->FIRDatabaseQuery{
-        return (itemRef?.queryLimited(toLast: UInt(limit)).queryOrdered(byChild: "user").queryEqual(toValue: user))!
+    func queryItemByUser(user:String)->FIRDatabaseQuery{
+        return (itemRef?.queryOrdered(byChild: "user").queryEqual(toValue: user))!
     }
     
     func queryBySearchStr(limit:Int, query:String)->FIRDatabaseQuery{
         return (itemRef?.queryLimited(toLast: UInt(limit)).queryOrdered(byChild: "title").queryStarting(atValue: query))!
     }
+    
+    
     
     func getUser(uid:String)->Contact{
         let user = Contact()
@@ -62,6 +64,7 @@ class Query: NSObject {
         var items = [Item]()
         for child:FIRDataSnapshot in snapshot.children.allObjects as! [FIRDataSnapshot]{
             let item = Item()
+            item.itemId = child.key
             print("snapshot --------> \(snapshot)")
             print("child --------> \(child)")
             for elem:FIRDataSnapshot in child.children.allObjects as! [FIRDataSnapshot]{
@@ -146,6 +149,7 @@ class Query: NSObject {
                 }
             }
         })
+        item.itemId = itemId
         return item
     }
     

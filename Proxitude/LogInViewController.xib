@@ -21,19 +21,8 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UHq-TL-qQ2">
-                    <rect key="frame" x="30" y="150" width="315" height="150"/>
+                    <rect key="frame" x="30" y="150" width="315" height="120"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tFs-O6-HeI">
-                            <rect key="frame" x="30" y="92" width="255" height="28"/>
-                            <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <state key="normal" title="Choose Your School">
-                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="signout:" destination="-1" eventType="touchUpInside" id="MZc-qV-EBc"/>
-                            </connections>
-                        </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nLy-tZ-omJ" customClass="GIDSignInButton">
                             <rect key="frame" x="30" y="32" width="255" height="40"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -44,20 +33,17 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="0.845703125" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="150" id="JUo-RT-MDm"/>
+                        <constraint firstAttribute="height" constant="120" id="JUo-RT-MDm"/>
                         <constraint firstItem="nLy-tZ-omJ" firstAttribute="top" secondItem="UHq-TL-qQ2" secondAttribute="top" constant="32" id="NsN-xt-MJR"/>
-                        <constraint firstItem="nLy-tZ-omJ" firstAttribute="trailing" secondItem="tFs-O6-HeI" secondAttribute="trailing" id="fC6-rN-NEj"/>
-                        <constraint firstItem="tFs-O6-HeI" firstAttribute="leading" secondItem="UHq-TL-qQ2" secondAttribute="leading" constant="30" id="fKC-zm-iFt"/>
-                        <constraint firstItem="tFs-O6-HeI" firstAttribute="centerX" secondItem="UHq-TL-qQ2" secondAttribute="centerX" id="n6h-Wt-NYV"/>
-                        <constraint firstItem="tFs-O6-HeI" firstAttribute="top" secondItem="nLy-tZ-omJ" secondAttribute="bottom" constant="20" id="qre-U9-dEP"/>
-                        <constraint firstItem="nLy-tZ-omJ" firstAttribute="leading" secondItem="tFs-O6-HeI" secondAttribute="leading" id="wlb-MW-Vy7"/>
+                        <constraint firstAttribute="trailing" secondItem="nLy-tZ-omJ" secondAttribute="trailing" constant="30" id="bwS-jS-NPW"/>
+                        <constraint firstItem="nLy-tZ-omJ" firstAttribute="leading" secondItem="UHq-TL-qQ2" secondAttribute="leading" constant="30" id="cTM-SF-MeW"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nJy-0r-RZy">
-                    <rect key="frame" x="10" y="10" width="30" height="30"/>
+                    <rect key="frame" x="10" y="10" width="40" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="30" id="nZZ-K6-Guh"/>
-                        <constraint firstAttribute="height" constant="30" id="o2H-8y-tBG"/>
+                        <constraint firstAttribute="width" constant="40" id="nZZ-K6-Guh"/>
+                        <constraint firstAttribute="height" constant="40" id="o2H-8y-tBG"/>
                     </constraints>
                     <state key="normal" image="close"/>
                     <connections>
