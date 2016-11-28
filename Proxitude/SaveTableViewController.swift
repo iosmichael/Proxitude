@@ -66,11 +66,7 @@ class SaveTableViewController: UITableViewController {
     }
     
     func fillData(){
-        let query = Query()
-        query.queryByCategory(limit: 1, category: "Electronic").observe(.value, with: { snapshot in
-            self.list = query.getItems(snapshot: snapshot)
-            self.tableView.reloadData()
-        })
+        
     }
 
     func addPostBtn(){

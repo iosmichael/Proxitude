@@ -55,6 +55,7 @@ class Item: NSObject {
     func writeItem(user:String){
         storageRef = FIRStorage.storage().reference(forURL: storageURL)
         let itemsNode = ref?.child("items").childByAutoId()
+        let tagsNode = ref?.child("tags")
         let usersNode = ref?.child("users").child(uid).child("items").childByAutoId()
         
         FIRAuth.auth()?.signInAnonymously() { (user, error) in
@@ -97,7 +98,7 @@ class Item: NSObject {
         itemsNode?.updateChildValues(posts)
         for tag in tags{
             //category links
-            itemsNode?.child("tags").child(tag).setValue(1)
+            tagsNode?.child(tag).childByAutoId().setValue(autoId)
         }
     }
     
