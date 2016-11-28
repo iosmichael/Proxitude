@@ -166,9 +166,9 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, UISea
     
     func queryGetItems(searchStr:String){
         let query = Query()
+        let resultController:SearchResultTableViewController = self.searchController?.searchResultsController as! SearchResultTableViewController
         query.queryBySearchStr(limit: 20, query: searchStr).observe(.value, with: { snapshot in
-            let resultController:SearchResultTableViewController = self.searchController?.searchResultsController as! SearchResultTableViewController
-            resultController.items = query.getItems(snapshot: snapshot)
+            resultController.items = query.getSimpleItems(snapshot: snapshot)
             resultController.tableView.reloadData()
         })
     }

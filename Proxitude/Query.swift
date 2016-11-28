@@ -32,7 +32,7 @@ class Query: NSObject {
     
     //
     func queryBySearchStr(limit:Int, query:String)->FIRDatabaseQuery{
-        return (itemRef?.queryLimited(toLast: UInt(limit)).queryOrdered(byChild: "title").queryStarting(atValue: query))!
+        return (itemRef?.queryLimited(toLast: UInt(limit)).queryOrdered(byChild: "name").queryStarting(atValue: query))!
     }
     
     
@@ -106,6 +106,31 @@ class Query: NSObject {
         }
         return items
     }
-    
+    public func getSimpleItems(snapshot:FIRDataSnapshot)->[Item]{
+        //just get two fields
+        var items = [Item]()
+        for child:FIRDataSnapshot in snapshot.children.allObjects as! [FIRDataSnapshot]{
+            let item = Item()
+            item.itemId = child.key
+            print("snapshot --------> \(snapshot)")
+            print("child --------> \(child)")
+            for elem:FIRDataSnapshot in child.children.allObjects as! [FIRDataSnapshot]{
+                switch elem.key {
+                case "name":
+                    item.name = elem.value as! String!
+                    break
+                case "price":
+                    item.price = elem.value as! String!
+                    break
+                default:
+                    break
+                }
+            }
+            print("fields: \(item.fields), imagesURL: \(item.imagesURL), name: \(item.name)")
+            items.insert(item, at: 0)
+        }
+        return items
+    }
+
        
 }
