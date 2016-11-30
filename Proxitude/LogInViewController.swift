@@ -16,16 +16,11 @@ class LogInViewController: UIViewController, GIDSignInUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         GIDSignIn.sharedInstance().uiDelegate = self
+        
         // Do any additional setup after loading the view.
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        let logged = FIRAuth.auth()?.currentUser
-        if logged != nil {
-            dismiss(animated: true, completion: nil)
-        }
-    }
 
+    
     @IBAction func close(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }

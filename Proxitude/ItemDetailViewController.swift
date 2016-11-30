@@ -17,6 +17,7 @@ class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableView
     let imageCellIdentifier = "imageCell"
     let customCellIdentifier = "listCell"
     var images = [UIImage]()
+    var request = true
     
     let imageCollectionCellHeight:CGFloat = 100
     let customListCellHeight:CGFloat = 44
@@ -47,6 +48,7 @@ class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableView
         setup()
         setupNav()
         registerCell()
+        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -175,6 +177,12 @@ class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableView
         navigationItem.leftBarButtonItem = navLeftBtn
         navigationItem.leftBarButtonItem?.tintColor = UIColor.white
         navigationItem.rightBarButtonItem?.tintColor = UIColor.white
+        
+        if request {
+            navigationItem.title = "Item"
+        }else{
+            navigationItem.title = "Request"
+        }
     }
     
     func back(){
@@ -194,10 +202,13 @@ class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableView
     }
     
     func setItem(){
+        
         list = [(cellType.SVLL,"Title",(item?.name)!),
-                    (cellType.SVLL,"Price",(item?.price)!),
                     (cellType.SVLL,"Description",(item?.detail)!),
                     (cellType.SVLL,"Email",(item?.user)!)]
+        if request {
+            list.insert((cellType.SVLL,"Price",(item?.price)!), at: 1)
+        }
         
         for (field,input) in (item?.fields)! {
             list.insert((cellType.SVLL,field,input), at: list.count)
@@ -209,7 +220,7 @@ class ItemDetailViewController: UIViewController,UITableViewDelegate,UITableView
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
             mail.setToRecipients([(item?.user)!])
-            mail.setMessageBody("<p>You're so awesome!</p>", isHTML: true)
+            mail.setMessageBody("<p></p>", isHTML: true)
             present(mail, animated: true)
         } else {
             // show failure alert

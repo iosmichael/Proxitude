@@ -13,6 +13,7 @@ class SearchResultTableViewController: UITableViewController {
 
     var items = [Item]()
     let itemIdentifier = "itemCell"
+    weak var parentC: UIViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +50,7 @@ class SearchResultTableViewController: UITableViewController {
     }
     
     func getItem(itemId:String){
-        FIRDatabase.database().reference().child("wheaton-college").child("items").child(itemId).observeSingleEvent(of: .value, with: {
+        FIRDatabase.database().reference().child("colleges/wheaton-college").child("items").child(itemId).observeSingleEvent(of: .value, with: {
             snapshot in
             let item = Item()
             for elem:FIRDataSnapshot in snapshot.children.allObjects as! [FIRDataSnapshot]{
@@ -80,6 +81,7 @@ class SearchResultTableViewController: UITableViewController {
                 case "tags":
                     break
                 case "sell":
+                    item.sell = elem.value as! Bool!
                     break
                 default:
                     let tuple = ("\(elem.key)", "\(elem.value!)")
@@ -87,11 +89,11 @@ class SearchResultTableViewController: UITableViewController {
                     break
                 }
             }
-            print(snapshot)
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
             let itemDetailController:ItemDetailViewController = storyboard.instantiateViewController(withIdentifier: "itemDetail") as! ItemDetailViewController
             itemDetailController.item = item
-            self.present(itemDetailController, animated: true, completion: nil)
+            itemDetailController.request = item.sell
+            self.parentC?.navigationController?.pushViewController(itemDetailController, animated: true)
         })
     }
 

@@ -18,7 +18,8 @@ class ItemTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        self.thumbnail.layer.cornerRadius = 5
+        self.thumbnail.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

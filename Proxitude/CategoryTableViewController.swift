@@ -25,6 +25,8 @@ class CategoryTableViewController: UITableViewController {
         setup()
         query()
         navigationController?.masterNav()
+        navigationController?.navigationItem.title = category
+        navigationController?.navigationBar.tintColor = UIColor.white
     }
 
     // MARK: - Table view data source
@@ -76,13 +78,13 @@ class CategoryTableViewController: UITableViewController {
     
     func query(){
         if queryType! == .category {
-            queryByCategory(category: category!, limit: 60)
+            queryByCategory(category: category!, limit: 100)
         }else{
             let query = Query()
             if let user = FIRAuth.auth()?.currentUser {
                 for profile in user.providerData {
                     query.queryItemByUser(user: profile.email!).observe(.value, with: { snapshot in
-                        self.items = query.getItems(snapshot: snapshot)
+                        self.items = query.getItems(snapshot: snapshot,sell:true)
                         self.tableView.reloadData()
                     })
                 }
@@ -91,7 +93,7 @@ class CategoryTableViewController: UITableViewController {
     }
     
     func queryByCategory(category:String,limit:Int){
-        let ref = FIRDatabase.database().reference().child("wheaton-college").child("tags").child(category)
+        let ref = FIRDatabase.database().reference().child("colleges/wheaton-college").child("tags").child(category)
         ref.queryLimited(toLast: UInt(limit)).observe(.value, with: {
             snapshot in
             for child:FIRDataSnapshot in snapshot.children.allObjects as! [FIRDataSnapshot]{
@@ -101,7 +103,7 @@ class CategoryTableViewController: UITableViewController {
     }
     
     func getItem(itemId:String){
-        FIRDatabase.database().reference().child("wheaton-college").child("items").child(itemId).observeSingleEvent(of: .value, with: {
+        FIRDatabase.database().reference().child("colleges/wheaton-college").child("items").child(itemId).observeSingleEvent(of: .value, with: {
             snapshot in
             let item = Item()
             for elem:FIRDataSnapshot in snapshot.children.allObjects as! [FIRDataSnapshot]{
@@ -139,7 +141,6 @@ class CategoryTableViewController: UITableViewController {
                     break
                 }
             }
-            print(item.name)
             self.items.insert(item, at: self.items.count)
             self.tableView.reloadData()
         })

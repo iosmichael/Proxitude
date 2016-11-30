@@ -11,7 +11,7 @@ import Firebase
 
 class Item: NSObject {
     let storageURL = "gs://dazzling-fire-5565.appspot.com"
-    
+    let tagList = ["BITH","HUMANITIES","SCIENCES","LANGUAGES","OTHER"]
     var itemId:String!
     var name:String!
     var price:String!
@@ -27,7 +27,7 @@ class Item: NSObject {
     //below for post
     var tags = [String]()
     var images = [UIImage]()
-    var ref: FIRDatabaseReference? = FIRDatabase.database().reference().child("wheaton-college")
+    var ref: FIRDatabaseReference? = FIRDatabase.database().reference().child("colleges/wheaton-college")
     var storageRef: FIRStorageReference?
     
     func postData(type:Bool, name:String,price:String,detail:String,tags:[String],images:[UIImage],fields:[(String,String)]){
@@ -42,9 +42,9 @@ class Item: NSObject {
             for profile in user.providerData {
                 self.user = profile.email
                 self.uid = profile.uid
+                writeItem(user: self.user)
             }
         }
-        writeItem(user: self.user)
     }
     
     func readData(itemId:String){
@@ -66,9 +66,24 @@ class Item: NSObject {
         let autoId = itemsNode?.key
         usersNode?.setValue(autoId)
         if sell{
+            let thumbnailImg = images[0].resizeWith(width: 70)
+            let thumbnailData = UIImageJPEGRepresentation(thumbnailImg!, 0.2)
+            let thumbnailRef = storageRef?.child("images/\(autoId)-image-thumbnail.jpg")
+            let thumbMetaData = FIRStorageMetadata()
+            thumbMetaData.contentType = "image/jpg"
+            thumbnailRef?.put(thumbnailData!, metadata: thumbMetaData){ metadata, error in
+                if (error != nil) {
+                    print(error!)
+                    // Uh-oh, an error occurred!
+                }
+                let downloadURL:String = (metadata!.downloadURL()?.absoluteString)!
+                itemsNode?.child("thumbnail").setValue("\(downloadURL)")
+            }
+            
             for i in 0...images.count-1{
-                //let data = UIImageJPEGRepresentation(images[i], 0.8)
-                let data = UIImageJPEGRepresentation(images[i], 0.8)
+                let screenWidth = UIScreen.main.bounds.width
+                let smImage = images[i].resizeWith(width: screenWidth)
+                let data = UIImageJPEGRepresentation(smImage!, 0.5)
                 let picRef = storageRef?.child("images/\(autoId)-image-\(i).jpg")
                 let metaData = FIRStorageMetadata()
                 metaData.contentType = "image/jpg"
@@ -79,9 +94,6 @@ class Item: NSObject {
                     }
                     let downloadURL:String = (metadata!.downloadURL()?.absoluteString)!
                     // Metadata contains file metadata such as size, content-type, and download URL.
-                    if i == 0 {
-                        itemsNode?.child("thumbnail").setValue("\(downloadURL)")
-                    }
                     itemsNode?.child("images/image-\(i)").setValue("\(downloadURL)")
                 }
             }
@@ -89,6 +101,9 @@ class Item: NSObject {
         //#warning - Need dates! here!
         let currentDate: Date = Date()
         let dateString: String = currentDate.convertDateToString()
+        if price == nil{
+            price = ""
+        }
         var posts = ["name":name!, "price":price!, "detail":detail!, "user":user, "date":dateString, "sell":sell] as [String : Any]
         for (field, input) in fields{
             posts[field] = input
@@ -102,13 +117,16 @@ class Item: NSObject {
         }
     }
     
-    func save(itemID:String,user:String){
-        ref?.child("users").child(user).child("saves").childByAutoId().setValue(itemID)
-    }
-    
     func deleteItem(itemID:String){
         let itemsNode = ref?.child("items").child(itemID)
         itemsNode?.removeValue()
+        //remove all tags value
+        //REMOVE ERROR!
+        for tag in tagList {
+            ref?.child("tags").child(tag).child(itemID).removeValue()
+            print("remove \(tag): \(itemID)")
+        }
+        
     }
     
     
@@ -125,5 +143,21 @@ extension Date{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.date(from: date)!
+    }
+}
+
+
+extension UIImage{
+    
+    public func resizeWith(width: CGFloat) -> UIImage? {
+        let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))))
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = self
+        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, scale)
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        imageView.layer.render(in: context)
+        guard let result = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
+        UIGraphicsEndImageContext()
+        return result
     }
 }

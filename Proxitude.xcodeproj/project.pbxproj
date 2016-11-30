@@ -14,6 +14,7 @@
 		9E0CD00D1DE91C40000C1FF9 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0CD00C1DE91C40000C1FF9 /* QRCodeViewController.swift */; };
 		9E0CD00F1DE91C6D000C1FF9 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E0CD00E1DE91C6D000C1FF9 /* AVFoundation.framework */; };
 		9E0CD0111DE92307000C1FF9 /* ChooseTagsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E0CD0101DE92307000C1FF9 /* ChooseTagsTableViewController.swift */; };
+		9E3168A51DEF598F00B7AEDC /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3168A41DEF598F00B7AEDC /* Contact.swift */; };
 		9E486C7F1DE8DEE1003CDBBE /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E486C7D1DE8DEE1003CDBBE /* ProfileTableViewCell.swift */; };
 		9E486C801DE8DEE1003CDBBE /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E486C7E1DE8DEE1003CDBBE /* ProfileTableViewCell.xib */; };
 		9E486C821DE8E000003CDBBE /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E486C811DE8E000003CDBBE /* HomeTableViewController.swift */; };
@@ -42,7 +43,6 @@
 		9E59FC8B1DE4FD67000DF062 /* ProxitudeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E59FC8A1DE4FD67000DF062 /* ProxitudeTests.swift */; };
 		9E59FC961DE4FD67000DF062 /* ProxitudeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E59FC951DE4FD67000DF062 /* ProxitudeUITests.swift */; };
 		9E69B4AB1DE9671700AAAC0C /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E69B4AA1DE9671700AAAC0C /* Query.swift */; };
-		9E69B4AD1DE9755D00AAAC0C /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E69B4AC1DE9755D00AAAC0C /* Contact.swift */; };
 		9EB0DB3E1DEC01780004EDE3 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB0DB3D1DEC01780004EDE3 /* CategoryTableViewController.swift */; };
 		9EB0DB401DEC4A970004EDE3 /* ImagePresenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB0DB3F1DEC4A970004EDE3 /* ImagePresenterViewController.swift */; };
 		9EB0DB421DEC4FAA0004EDE3 /* LoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB0DB411DEC4FAA0004EDE3 /* LoginTableViewCell.swift */; };
@@ -82,6 +82,7 @@
 		9E0CD00C1DE91C40000C1FF9 /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		9E0CD00E1DE91C6D000C1FF9 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9E0CD0101DE92307000C1FF9 /* ChooseTagsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseTagsTableViewController.swift; sourceTree = "<group>"; };
+		9E3168A41DEF598F00B7AEDC /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		9E486C7D1DE8DEE1003CDBBE /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		9E486C7E1DE8DEE1003CDBBE /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
 		9E486C811DE8E000003CDBBE /* HomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
@@ -115,7 +116,6 @@
 		9E59FC951DE4FD67000DF062 /* ProxitudeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxitudeUITests.swift; sourceTree = "<group>"; };
 		9E59FC971DE4FD67000DF062 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E69B4AA1DE9671700AAAC0C /* Query.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
-		9E69B4AC1DE9755D00AAAC0C /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		9EB0DB3D1DEC01780004EDE3 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		9EB0DB3F1DEC4A970004EDE3 /* ImagePresenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePresenterViewController.swift; sourceTree = "<group>"; };
 		9EB0DB411DEC4FAA0004EDE3 /* LoginTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginTableViewCell.swift; sourceTree = "<group>"; };
@@ -225,7 +225,7 @@
 			children = (
 				9EEDD3F41DE93106007D7D58 /* Item.swift */,
 				9E69B4AA1DE9671700AAAC0C /* Query.swift */,
-				9E69B4AC1DE9755D00AAAC0C /* Contact.swift */,
+				9E3168A41DEF598F00B7AEDC /* Contact.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -396,7 +396,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -622,12 +622,12 @@
 				9E0CD00D1DE91C40000C1FF9 /* QRCodeViewController.swift in Sources */,
 				9E51306C1DE8CF4F0014140B /* ContactTableViewCell.swift in Sources */,
 				9EB0DB401DEC4A970004EDE3 /* ImagePresenterViewController.swift in Sources */,
-				9E69B4AD1DE9755D00AAAC0C /* Contact.swift in Sources */,
 				9E5130611DE8CBD70014140B /* MasterViewController.swift in Sources */,
 				9E486C841DE8E409003CDBBE /* HomePageSlideView.swift in Sources */,
 				9E0CD00B1DE8EB64000C1FF9 /* ProfileTableViewController.swift in Sources */,
 				9E51305C1DE8CBD70014140B /* ItemDetailViewController.swift in Sources */,
 				9E5130591DE8CBD70014140B /* ImagesTableViewCell.swift in Sources */,
+				9E3168A51DEF598F00B7AEDC /* Contact.swift in Sources */,
 				9E5130631DE8CBD70014140B /* SearchResultTableViewController.swift in Sources */,
 				9E5130571DE8CBD70014140B /* CustomTableViewCell.swift in Sources */,
 				9E486C821DE8E000003CDBBE /* HomeTableViewController.swift in Sources */,
@@ -790,16 +790,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Proxitude/Proxitude.entitlements;
 				DEVELOPMENT_TEAM = B28P9MRX7G;
 				INFOPLIST_FILE = Proxitude/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.proximarketplace.proxifinal.Proxitude;
+				PRODUCT_BUNDLE_IDENTIFIER = com.proximarketplace.proxifinal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Proxitude/Proxitude-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -809,15 +809,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Proxitude/Proxitude.entitlements;
 				DEVELOPMENT_TEAM = B28P9MRX7G;
 				INFOPLIST_FILE = Proxitude/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.proximarketplace.proxifinal.Proxitude;
+				PRODUCT_BUNDLE_IDENTIFIER = com.proximarketplace.proxifinal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Proxitude/Proxitude-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -36,11 +36,11 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
         case CII
         case CLL
     }
-    var list = [(cellType.LI,"Title","Item Title"),
-                (cellType.LI,"Price","Item Price"),
+    var list = [(cellType.LI,"Title","e.g. Microeconomics"),
+                (cellType.LI,"Price","e.g. $15.00"),
                 (cellType.LL,"Detail","(Required)"),
-                (cellType.LL,"Tags","(Required)"),
-                (cellType.CII,"Field","Value")]
+                (cellType.LL,"Categories","(Required)"),
+                (cellType.CII,"Add Tag","Information ")]
     
     
     @IBOutlet weak var tableview: UITableView!
@@ -59,6 +59,17 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
         tableview.separatorColor = UIColor.lightGray
         registerCell()
         // Do any additional setup after loading the view, typically from a nib.
+        let titleL: UILabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: tableview.frame.width, height: 15))
+        titleL.textAlignment = .center
+        titleL.font = UIFont.systemFont(ofSize: 10)
+        if request {
+            titleL.text = "choose at least one image"
+        }else{
+            titleL.text = "request anything you want"
+        }
+        titleL.textColor = UIColor.white
+        titleL.backgroundColor = UIColor.init(hex: "525659")
+        tableview.tableHeaderView = titleL
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -173,6 +184,11 @@ class PostItemViewController: UIViewController,UITableViewDelegate,UITableViewDa
         navigationItem.leftBarButtonItem = navLeftBtn
         navigationItem.leftBarButtonItem?.tintColor = UIColor.white
         navigationItem.rightBarButtonItem?.tintColor = UIColor.white
+        if request {
+            navigationItem.title = "Post"
+        }else{
+            navigationItem.title = "Request"
+        }
     }
     
     func cancel(){

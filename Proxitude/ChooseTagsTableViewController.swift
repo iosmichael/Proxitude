@@ -11,7 +11,7 @@ import UIKit
 class ChooseTagsTableViewController: UITableViewController , SelectTagCellProtocol{
     
     var selectedTagList = [String]()
-    var tagList = ["Sport Gears","Clothing","Furniture","Electronics","Entertainment","Textbook"]
+    let tagList = ["BITH","HUMANITIES","SCIENCES","LANGUAGES","OTHER"]
     weak var parentC: PostItemViewController?
     let selectTagCellIdentifier = "SelectTagCell"
 
@@ -59,7 +59,7 @@ class ChooseTagsTableViewController: UITableViewController , SelectTagCellProtoc
         let titleL: UILabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 40))
         titleL.textAlignment = .center
         titleL.font = UIFont.systemFont(ofSize: 18)
-        titleL.text = "Choose Tags"
+        titleL.text = "Choose Categories"
         tableView.tableHeaderView = titleL
     }
     
@@ -69,7 +69,6 @@ class ChooseTagsTableViewController: UITableViewController , SelectTagCellProtoc
         }else{
             removeTag(tag: tag)
         }
-        print("selected Tags: \(selectedTagList)")
     }
     
     func removeTag(tag:String){

@@ -18,9 +18,9 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, UISea
     let tagCellHeight: CGFloat = 40
     let bannerHeight:CGFloat = 120
     let whatsNewNum = 20
-    let tagList = [("tagIcon","Sport Gears"),("tagIcon","Clothing"),
-                   ("tagIcon","Furniture"),("tagIcon","Electronics"),
-                   ("tagIcon","Entertainment"),("tagIcon","Textbook")]
+    let tagList = [("bith","BITH"),("humanities","HUMANITIES"),
+                   ("science","SCIENCES"),("languages","LANGUAGES"),
+                   ("other","OTHER")]
     var list = [Item]()
 
     override func viewDidLoad() {
@@ -28,7 +28,7 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, UISea
         setup()
         fillData()
         navigationController?.masterNav()
-        navigationController?.extendedLayoutIncludesOpaqueBars = true
+        navigationController?.extendedLayoutIncludesOpaqueBars = false
         setupSearchBar()
         addPostBtn()
         // Uncomment the following line to preserve selection between presentations
@@ -50,6 +50,8 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, UISea
             resultController.items.removeAll()
             resultController.tableView.reloadData()
         }else{
+            let resultController:SearchResultTableViewController = self.searchController?.searchResultsController as! SearchResultTableViewController
+            resultController.items.removeAll()
             queryGetItems(searchStr: searchStr!)
         }
         //let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
@@ -118,8 +120,8 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, UISea
 
     func fillData(){
         let query = Query()
-        query.queryNew(limit: 20,sell:true).observe(.value, with: { snapshot in
-            self.list = query.getItems(snapshot: snapshot)
+        query.queryNew(limit: 200,sell:true).observe(.value, with: { snapshot in
+            self.list = query.getItems(snapshot: snapshot,sell:true)
             self.tableView.reloadData()
         })
     }
@@ -144,7 +146,10 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, UISea
     }
     
     func setupSearchBar(){
-        searchController = UISearchController.init(searchResultsController: SearchResultTableViewController())
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let searchResultViewController:SearchResultTableViewController = storyboard.instantiateViewController(withIdentifier: "search") as! SearchResultTableViewController
+        searchResultViewController.parentC = self
+        searchController = UISearchController.init(searchResultsController: searchResultViewController)
         searchController?.extendedLayoutIncludesOpaqueBars = true
         searchController?.hidesNavigationBarDuringPresentation = true
         searchController?.searchResultsUpdater = self
@@ -162,13 +167,16 @@ class HomeTableViewController: UITableViewController, UISearchBarDelegate, UISea
         searchBar?.isTranslucent = false
         searchBar?.setTextColor(color: UIColor.white)
         searchBar?.setTextFieldBackgroundColor(color: UIColor.init(hex: "464646"))
+        definesPresentationContext = true
     }
     
     func queryGetItems(searchStr:String){
         let query = Query()
         let resultController:SearchResultTableViewController = self.searchController?.searchResultsController as! SearchResultTableViewController
-        query.queryBySearchStr(limit: 20, query: searchStr).observe(.value, with: { snapshot in
+        query.queryBySearchStr(limit: 25, query: searchStr).observeSingleEvent(of:.value, with: { snapshot in
             resultController.items = query.getSimpleItems(snapshot: snapshot)
+            print("Result: \(snapshot)")
+            print(resultController.items)
             resultController.tableView.reloadData()
         })
     }

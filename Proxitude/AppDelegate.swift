@@ -53,8 +53,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 print(error.localizedDescription)
                 return
             }
-            
-            print("email: \(user?.email) ID: \(user?.uid) Name: \(user?.displayName)")
         })
     }
     

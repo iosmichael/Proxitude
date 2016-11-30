@@ -2,16 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "cell.png",
+      "filename" : "science.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "cell2x.png",
+      "filename" : "science2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "science3x.png",
       "scale" : "3x"
     }
   ],

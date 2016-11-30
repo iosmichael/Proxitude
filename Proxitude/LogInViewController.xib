@@ -20,23 +20,12 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UHq-TL-qQ2">
-                    <rect key="frame" x="30" y="150" width="315" height="120"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nLy-tZ-omJ" customClass="GIDSignInButton">
-                            <rect key="frame" x="30" y="32" width="255" height="40"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="PY3-iI-qoG"/>
-                            </constraints>
-                        </view>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="0.845703125" colorSpace="calibratedWhite"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nLy-tZ-omJ" customClass="GIDSignInButton">
+                    <rect key="frame" x="62.5" y="313" width="250" height="40"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="120" id="JUo-RT-MDm"/>
-                        <constraint firstItem="nLy-tZ-omJ" firstAttribute="top" secondItem="UHq-TL-qQ2" secondAttribute="top" constant="32" id="NsN-xt-MJR"/>
-                        <constraint firstAttribute="trailing" secondItem="nLy-tZ-omJ" secondAttribute="trailing" constant="30" id="bwS-jS-NPW"/>
-                        <constraint firstItem="nLy-tZ-omJ" firstAttribute="leading" secondItem="UHq-TL-qQ2" secondAttribute="leading" constant="30" id="cTM-SF-MeW"/>
+                        <constraint firstAttribute="width" constant="250" id="5aA-Si-Gww"/>
+                        <constraint firstAttribute="height" constant="40" id="PY3-iI-qoG"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nJy-0r-RZy">
@@ -50,19 +39,28 @@
                         <action selector="close:" destination="-1" eventType="touchUpInside" id="Smc-jj-qQE"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="proxi white.png" translatesAutoresizingMaskIntoConstraints="NO" id="cOa-Av-GmL">
+                    <rect key="frame" x="152" y="213" width="70" height="70"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="70" id="RfE-KU-8J4"/>
+                        <constraint firstAttribute="height" constant="70" id="pu6-3q-TUs"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.14117647058823529" green="0.63921568627450975" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="UHq-TL-qQ2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="150" id="0qS-wU-Rpq"/>
                 <constraint firstItem="nJy-0r-RZy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="92R-rN-GcC"/>
-                <constraint firstItem="UHq-TL-qQ2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="KD8-ng-x3v"/>
                 <constraint firstItem="nJy-0r-RZy" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="Lw1-Lc-sPJ"/>
-                <constraint firstItem="UHq-TL-qQ2" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vrc-bL-1J4"/>
+                <constraint firstItem="nLy-tZ-omJ" firstAttribute="top" secondItem="cOa-Av-GmL" secondAttribute="bottom" constant="30" id="UZj-sK-Kqd"/>
+                <constraint firstItem="nLy-tZ-omJ" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="iIb-RQ-qVA"/>
+                <constraint firstItem="cOa-Av-GmL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ucK-hC-qvS"/>
+                <constraint firstItem="nLy-tZ-omJ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="wMs-rX-247"/>
             </constraints>
             <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>
     </objects>
     <resources>
         <image name="close" width="15" height="15"/>
+        <image name="proxi white.png" width="444" height="438"/>
     </resources>
 </document>

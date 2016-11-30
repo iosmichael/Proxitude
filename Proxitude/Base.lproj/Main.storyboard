@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--PROXI-->
+        <!--Proxi-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="post" id="BYZ-38-t0r" customClass="PostItemViewController" customModule="Proxitude" customModuleProvider="target" sceneMemberID="viewController">
@@ -39,7 +39,7 @@
                             <constraint firstItem="0fj-ga-1dM" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="x11-rl-24p"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="PROXI" id="Sga-Bb-N5V"/>
+                    <navigationItem key="navigationItem" title="Proxi" id="Sga-Bb-N5V"/>
                     <connections>
                         <outlet property="tableview" destination="y9I-mj-ia9" id="Ptd-dh-3G2"/>
                     </connections>
@@ -57,11 +57,11 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" red="0.12390453093884331" green="0.56538749606116356" blue="0.58156658495555558" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="q64-ir-8iO" kind="relationship" relationship="viewControllers" id="Pze-Z7-EEV"/>
                         <segue destination="Zr7-hm-9b5" kind="relationship" relationship="viewControllers" id="TEH-YO-sRb"/>
-                        <segue destination="WXP-Pu-n4P" kind="relationship" relationship="viewControllers" id="ahF-AF-hnk"/>
                         <segue destination="kbu-vN-n63" kind="relationship" relationship="viewControllers" id="s4F-Ic-Vrk"/>
                     </connections>
                 </tabBarController>
@@ -82,30 +82,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vNj-g2-Vaq">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="627"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Zi-IU-dev">
-                                <rect key="frame" x="0.0" y="627" width="375" height="40"/>
-                                <color key="backgroundColor" red="1" green="0.64910236934698395" blue="0.14997109924345187" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="2dM-10-M3U"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
-                                <state key="normal" title="SAVE">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="6Zi-IU-dev" firstAttribute="leading" secondItem="WQH-ZY-bJQ" secondAttribute="leading" id="2Lo-lL-mfY"/>
-                            <constraint firstItem="vNj-g2-Vaq" firstAttribute="leading" secondItem="6Zi-IU-dev" secondAttribute="leading" id="Sef-tk-J65"/>
-                            <constraint firstAttribute="trailing" secondItem="6Zi-IU-dev" secondAttribute="trailing" id="cZY-pF-YfP"/>
-                            <constraint firstItem="6Zi-IU-dev" firstAttribute="top" secondItem="vNj-g2-Vaq" secondAttribute="bottom" id="gfs-rY-vE8"/>
-                            <constraint firstItem="R7N-V3-xni" firstAttribute="top" secondItem="6Zi-IU-dev" secondAttribute="bottom" id="lZI-ZL-P1y"/>
-                            <constraint firstItem="vNj-g2-Vaq" firstAttribute="top" secondItem="WQH-ZY-bJQ" secondAttribute="top" id="tBS-ZW-1v1"/>
-                            <constraint firstItem="vNj-g2-Vaq" firstAttribute="trailing" secondItem="6Zi-IU-dev" secondAttribute="trailing" id="x6q-7i-tAI"/>
+                            <constraint firstItem="vNj-g2-Vaq" firstAttribute="leading" secondItem="WQH-ZY-bJQ" secondAttribute="leading" id="BoC-cI-2th"/>
+                            <constraint firstItem="vNj-g2-Vaq" firstAttribute="bottom" secondItem="R7N-V3-xni" secondAttribute="top" id="Js6-N5-vah"/>
+                            <constraint firstItem="vNj-g2-Vaq" firstAttribute="top" secondItem="WQH-ZY-bJQ" secondAttribute="top" id="PlI-fJ-vQE"/>
+                            <constraint firstAttribute="trailing" secondItem="vNj-g2-Vaq" secondAttribute="trailing" id="lXL-BM-Lw8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Item Title" id="PAg-06-2kg">
@@ -117,7 +103,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fRd-O2-WjK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3193" y="1675"/>
+            <point key="canvasLocation" x="3192.8000000000002" y="1674.5127436281859"/>
         </scene>
         <!--Choose Tags Table View Controller-->
         <scene sceneID="HHa-Vl-p12">
@@ -139,10 +125,39 @@
             </objects>
             <point key="canvasLocation" x="3193" y="2335"/>
         </scene>
+        <!--Search Result Table View Controller-->
+        <scene sceneID="1Pj-ea-A3m">
+            <objects>
+                <tableViewController storyboardIdentifier="search" id="Pde-b7-QDq" customClass="SearchResultTableViewController" customModule="Proxitude" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="2M9-ct-FHb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="HyX-Od-bZ7">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HyX-Od-bZ7" id="Cd7-bc-3NJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Pde-b7-QDq" id="4eW-Xb-91a"/>
+                            <outlet property="delegate" destination="Pde-b7-QDq" id="DtH-2e-7rb"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="i8N-hW-hUr"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ix9-PR-QNF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4745" y="2329"/>
+        </scene>
         <!--Proxi-->
         <scene sceneID="HeU-p8-vdL">
             <objects>
-                <viewController id="vBx-rN-QRL" customClass="SearchViewController" customModule="Proxitude" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" definesPresentationContext="YES" id="vBx-rN-QRL" customClass="SearchViewController" customModule="Proxitude" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wCl-7n-kP6"/>
                         <viewControllerLayoutGuide type="bottom" id="AO0-Kf-Gbg"/>
@@ -193,11 +208,11 @@
             </objects>
             <point key="canvasLocation" x="2310" y="1675"/>
         </scene>
-        <!--Search-->
+        <!--Wanted-->
         <scene sceneID="7xF-o1-Vd1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Zr7-hm-9b5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" image="search" selectedImage="search-active" id="06i-H2-bIe"/>
+                    <tabBarItem key="tabBarItem" title="Wanted" image="wanted" selectedImage="wanted" id="06i-H2-bIe"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3M9-6O-Lxm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -212,11 +227,11 @@
             </objects>
             <point key="canvasLocation" x="1636" y="997.15142428785612"/>
         </scene>
-        <!--Me-->
+        <!--Account-->
         <scene sceneID="UFf-tP-fEp">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kbu-vN-n63" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Me" image="person" selectedImage="person-active" id="aRb-vc-X1R"/>
+                    <tabBarItem key="tabBarItem" title="Account" image="person-active" selectedImage="person-active" id="aRb-vc-X1R"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="CEd-qn-nj7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -269,11 +284,11 @@
             </objects>
             <point key="canvasLocation" x="2310" y="2335"/>
         </scene>
-        <!--Home-->
+        <!--Textbook-->
         <scene sceneID="gWX-p5-3bE">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="q64-ir-8iO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="home" selectedImage="home-active" id="HnF-ju-7IO"/>
+                    <tabBarItem key="tabBarItem" title="Textbook" image="textbook" selectedImage="textbook" id="HnF-ju-7IO"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="hOQ-Ao-fXZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -291,7 +306,7 @@
         <!--Proxi-->
         <scene sceneID="v4D-2H-0H3">
             <objects>
-                <tableViewController id="E2s-sk-K1N" customClass="HomeTableViewController" customModule="Proxitude" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="E2s-sk-K1N" customClass="HomeTableViewController" customModule="Proxitude" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="I9P-Hc-AH9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -307,15 +322,30 @@
             </objects>
             <point key="canvasLocation" x="2310" y="301"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="AyD-dT-Q5W">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Mbn-SM-ryg" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="2aS-vm-m3m">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Pde-b7-QDq" kind="relationship" relationship="rootViewController" id="i0A-bz-5cb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t8j-xb-nkj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3999" y="2330"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="home" width="22" height="19"/>
-        <image name="home-active" width="22" height="18"/>
-        <image name="person" width="16" height="16"/>
         <image name="person-active" width="16" height="16"/>
         <image name="save" width="20" height="19"/>
         <image name="save-active" width="20" height="19"/>
-        <image name="search" width="20" height="20"/>
-        <image name="search-active" width="20" height="20"/>
+        <image name="textbook" width="25" height="21"/>
+        <image name="wanted" width="25" height="22"/>
     </resources>
 </document>

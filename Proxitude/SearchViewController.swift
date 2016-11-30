@@ -21,9 +21,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let itemHeight = 55
     
     let whatsNewNum = 20
-    let tagList = [("tagIcon","Sport Gears"),("tagIcon","Clothing"),
-                   ("tagIcon","Furniture"),("tagIcon","Electronics"),
-                   ("tagIcon","Entertainment"),("tagIcon","Textbook")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,25 +45,16 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "What's New"
+        return "New Request"
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if indexPath.section == 0{
-//            let cell:TagTableViewCell = tableView.dequeueReusableCell(withIdentifier: tagIdentifier, for: indexPath) as! TagTableViewCell
-//            let (tagImage, tagName) = tagList[indexPath.row]
-//            cell.setIconTag(icon: UIImage.init(named: tagImage)!, tag: tagName)
-//            cell.accessoryType = .disclosureIndicator
-//            cell.selectionStyle = .none
-//            return cell
-//        }else{
             let cell:ItemTableViewCell = tableView.dequeueReusableCell(withIdentifier: itemIdentifier, for: indexPath) as! ItemTableViewCell
             let item = items[indexPath.row]
             cell.setItem(item: item)
             cell.accessoryType = .disclosureIndicator
             cell.selectionStyle = .none
             return cell
-//        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -79,6 +67,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
             let itemDetailController:ItemDetailViewController = storyboard.instantiateViewController(withIdentifier: "itemDetail") as! ItemDetailViewController
             itemDetailController.item = items[indexPath.row]
+            itemDetailController.request = false
             navigationController?.pushViewController(itemDetailController, animated: true)
 //        }
     }
@@ -104,7 +93,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.separatorStyle = .singleLine
 //        tableView.register(UINib.init(nibName: "TagTableViewCell", bundle: nil), forCellReuseIdentifier: tagIdentifier)
         tableView.register(UINib.init(nibName: "ItemTableViewCell", bundle: nil), forCellReuseIdentifier: itemIdentifier)
-        searchController = UISearchController.init(searchResultsController: SearchResultTableViewController())
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let searchResultViewController:SearchResultTableViewController = storyboard.instantiateViewController(withIdentifier: "search") as! SearchResultTableViewController
+        searchResultViewController.parentC = self
+        searchController = UISearchController.init(searchResultsController: searchResultViewController)
         searchController?.searchResultsUpdater = self
         searchController?.searchBar.delegate = self
         customizeSearchBar()
@@ -144,17 +136,17 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     func fillData(){
         let query = Query()
-        query.queryNew(limit: 20,sell:false).observe(.value, with: { snapshot in
-            self.items = query.getItems(snapshot: snapshot)
+        query.queryNew(limit: 200,sell:false).observe(.value, with: { snapshot in
+            self.items = query.getItems(snapshot: snapshot,sell:false)
             self.tableView.reloadData()
         })
     }
     
     func queryGetItems(searchStr:String){
         let query = Query()
-        query.queryBySearchStr(limit: 20, query: searchStr).observe(.value, with: { snapshot in
+        query.queryBySearchStr(limit: 25, query: searchStr).observe(.value, with: { snapshot in
             let resultController:SearchResultTableViewController = self.searchController?.searchResultsController as! SearchResultTableViewController
-            resultController.items = query.getItems(snapshot: snapshot)
+            resultController.items = query.getItems(snapshot: snapshot,sell:false)
             resultController.tableView.reloadData()
         })
     }

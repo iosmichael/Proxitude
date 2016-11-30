@@ -17,9 +17,9 @@ class Query: NSObject {
     
     override init() {
         super.init()
-        itemRef = FIRDatabase.database().reference().child("wheaton-college/items")
-        userRef = FIRDatabase.database().reference().child("wheaton-college/users")
-        tagRef = FIRDatabase.database().reference().child("wheaton-college/tags")
+        itemRef = FIRDatabase.database().reference().child("colleges/wheaton-college/items")
+        userRef = FIRDatabase.database().reference().child("colleges/wheaton-college/users")
+        tagRef = FIRDatabase.database().reference().child("colleges/wheaton-college/tags")
     }
     
     func queryNew(limit:Int,sell:Bool)->FIRDatabaseQuery{
@@ -32,6 +32,7 @@ class Query: NSObject {
     
     //
     func queryBySearchStr(limit:Int, query:String)->FIRDatabaseQuery{
+        print("query \(query)")
         return (itemRef?.queryLimited(toLast: UInt(limit)).queryOrdered(byChild: "name").queryStarting(atValue: query))!
     }
     
@@ -59,7 +60,7 @@ class Query: NSObject {
     }
     
     //items snapshot
-    public func getItems(snapshot:FIRDataSnapshot)->[Item]{
+    public func getItems(snapshot:FIRDataSnapshot,sell:Bool)->[Item]{
         var items = [Item]()
         for child:FIRDataSnapshot in snapshot.children.allObjects as! [FIRDataSnapshot]{
             let item = Item()
@@ -94,6 +95,7 @@ class Query: NSObject {
                 case "tags":
                 break
                 case "sell":
+                    item.sell = elem.value as! Bool!
                 break
                 default:
                     let tuple = ("\(elem.key)", "\(elem.value!)")
@@ -102,18 +104,21 @@ class Query: NSObject {
                 }
             }
             print("fields: \(item.fields), imagesURL: \(item.imagesURL), name: \(item.name)")
-            items.insert(item, at: 0)
+            if sell == item.sell{
+                items.insert(item, at: items.count)
+            }
         }
         return items
     }
+    
+    
+    
     public func getSimpleItems(snapshot:FIRDataSnapshot)->[Item]{
         //just get two fields
         var items = [Item]()
         for child:FIRDataSnapshot in snapshot.children.allObjects as! [FIRDataSnapshot]{
             let item = Item()
             item.itemId = child.key
-            print("snapshot --------> \(snapshot)")
-            print("child --------> \(child)")
             for elem:FIRDataSnapshot in child.children.allObjects as! [FIRDataSnapshot]{
                 switch elem.key {
                 case "name":
@@ -127,7 +132,7 @@ class Query: NSObject {
                 }
             }
             print("fields: \(item.fields), imagesURL: \(item.imagesURL), name: \(item.name)")
-            items.insert(item, at: 0)
+            items.insert(item, at: items.count)
         }
         return items
     }
