@@ -97,7 +97,7 @@ class CategoryTableViewController: UITableViewController {
         ref.queryLimited(toLast: UInt(limit)).observe(.value, with: {
             snapshot in
             for child:FIRDataSnapshot in snapshot.children.allObjects as! [FIRDataSnapshot]{
-                self.getItem(itemId: child.value as! String)
+                self.getItem(itemId: child.key)
             }
         })
     }

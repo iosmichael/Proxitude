@@ -56,17 +56,13 @@ class Item: NSObject {
         storageRef = FIRStorage.storage().reference(forURL: storageURL)
         let itemsNode = ref?.child("items").childByAutoId()
         let tagsNode = ref?.child("tags")
-        let usersNode = ref?.child("users").child(uid).child("items").childByAutoId()
         
-        FIRAuth.auth()?.signInAnonymously() { (user, error) in
-            if let error = error {
-                print(error)
-            }
-        }
         let autoId = itemsNode?.key
-        usersNode?.setValue(autoId)
+        
         if sell{
-            let thumbnailImg = images[0].resizeWith(width: 70)
+            let screenWidth = UIScreen.main.bounds.width
+            let sqrThumbnailImage = UIImage.cropToBounds(image: images[0], width: Double(screenWidth), height: Double(screenWidth))
+            let thumbnailImg = sqrThumbnailImage.resizeWith(width: 70)
             let thumbnailData = UIImageJPEGRepresentation(thumbnailImg!, 0.2)
             let thumbnailRef = storageRef?.child("images/\(autoId)-image-thumbnail.jpg")
             let thumbMetaData = FIRStorageMetadata()
@@ -81,8 +77,8 @@ class Item: NSObject {
             }
             
             for i in 0...images.count-1{
-                let screenWidth = UIScreen.main.bounds.width
-                let smImage = images[i].resizeWith(width: screenWidth)
+                let sqrImage = UIImage.cropToBounds(image: images[i], width: Double(screenWidth), height: Double(screenWidth))
+                let smImage = sqrImage.resizeWith(width: screenWidth)
                 let data = UIImageJPEGRepresentation(smImage!, 0.5)
                 let picRef = storageRef?.child("images/\(autoId)-image-\(i).jpg")
                 let metaData = FIRStorageMetadata()
@@ -113,20 +109,18 @@ class Item: NSObject {
         itemsNode?.updateChildValues(posts)
         for tag in tags{
             //category links
-            tagsNode?.child(tag).childByAutoId().setValue(autoId)
+            tagsNode?.child(tag).child(autoId!).setValue(1)
         }
     }
     
     func deleteItem(itemID:String){
         let itemsNode = ref?.child("items").child(itemID)
         itemsNode?.removeValue()
-        //remove all tags value
-        //REMOVE ERROR!
-        for tag in tagList {
-            ref?.child("tags").child(tag).child(itemID).removeValue()
-            print("remove \(tag): \(itemID)")
-        }
         
+        for tag in tagList {
+            //need query here!
+            ref?.child("tags").child(tag).child(itemID).removeValue()
+        }
     }
     
     
@@ -159,5 +153,36 @@ extension UIImage{
         guard let result = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
         UIGraphicsEndImageContext()
         return result
+    }
+    
+    class func cropToBounds(image: UIImage, width: Double, height: Double) -> UIImage {
+        
+        let contextImage: UIImage = UIImage.init(cgImage: image.cgImage!)
+        
+        let contextSize: CGSize = contextImage.size
+        
+        var posX: CGFloat = 0.0
+        var posY: CGFloat = 0.0
+        var cgwidth: CGFloat = CGFloat(width)
+        var cgheight: CGFloat = CGFloat(height)
+        
+        // See what size is longer and create the center off of that
+        if contextSize.width > contextSize.height {
+            posX = ((contextSize.width - contextSize.height) / 2)
+            posY = 0
+            cgwidth = contextSize.height
+            cgheight = contextSize.height
+        } else {
+            posX = 0
+            posY = ((contextSize.height - contextSize.width) / 2)
+            cgwidth = contextSize.width
+            cgheight = contextSize.width
+        }
+        let rect: CGRect = CGRect.init(x: posX, y: posY, width: cgwidth, height: cgheight)
+        // Create bitmap image from context using the rect
+        let imageRef: CGImage = contextImage.cgImage!.cropping(to: rect)!
+        // Create a new image based on the imageRef and rotate back to the original orientation
+        let image: UIImage = UIImage(cgImage: imageRef, scale: image.scale, orientation: image.imageOrientation)
+        return image
     }
 }
